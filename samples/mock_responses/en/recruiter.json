@@ -1,0 +1,17 @@
+{
+  "agent": "Recruiter",
+  "score": 62,
+  "verdict": "A clean one-page CV with a relevant degree and project, but the generic objective and duty-style internship bullets hide the strongest evidence in a 6-second scan.",
+  "strengths": [
+    {"point": "One page, standard section order, easy to scan.", "evidence": "EDUCATION"},
+    {"point": "The graduation project is directly relevant to the role's demand-forecasting work.", "evidence": "Graduation Project: Demand Forecasting for a Bakery Chain"},
+    {"point": "Leadership signal from volunteering, with a concrete number.", "evidence": "Member of the university Data Science Club, organized 2 workshops for 40+ students."}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Objective", "evidence": "Hardworking and motivated recent graduate looking for a challenging position in a dynamic company where I can improve myself.", "problem": "This is the first thing a recruiter reads and it could describe any candidate; it does not mention 'data analyst', SQL, Python or retail data.", "fix": "Replace it with a 2-line summary that names the role and your 2 strongest proofs, e.g. 'Industrial engineering graduate focused on data analysis; forecasted daily sales for a 12-store bakery chain with Python and holds the Google Data Analytics certificate.'"},
+    {"severity": "medium", "section": "Experience", "evidence": "Attended meetings with the planning team.", "problem": "Attending meetings is not an achievement and takes space from stronger content.", "fix": "Delete this bullet or replace it with something you contributed in those meetings (only if true)."},
+    {"severity": "medium", "section": "Projects", "evidence": "Built a forecasting model that improved accuracy by 15%", "problem": "The project's key result is vague in the CV ('better than the old method'), so the reader cannot judge the impact.", "fix": "State how much better, with the metric you actually measured (e.g. MAPE from [X%] to [Y%]). Leave it out if you did not measure it."},
+    {"severity": "low", "section": "Experience", "evidence": "Worked at the cash register and helped customers.", "problem": "Part-time retail work is fine to keep, but as written it adds nothing for a data role.", "fix": "Keep it to one line, or mention a transferable element that is true (e.g. customer communication, handling daily sales reports)."},
+    {"severity": "low", "section": "Overall", "evidence": "July 2023 - 09/2023", "problem": "Mixed date styles look careless at a glance.", "fix": "Use one consistent date format across the CV."}
+  ]
+}

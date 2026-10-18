@@ -1,0 +1,15 @@
+{
+  "analysis": "Adım 1 – Bölüm: güçlü (İşletme). Sosyal medya: güçlü (kulüp Instagram, 1.200→3.400 takipçi) + staj. GA4: zayıf (yalnızca 'temel' yazıyor, kullanım yok). Meta/Google Ads: yok. Canva: zayıf (listede, örnek yok). Analitik düşünme: zayıf (rakip analizi var ama detay yok). İngilizce: B1, kısmen.\nAdım 2 – Derinlik: kulüp maddesi sonuç gösteriyor; staj maddeleri yalnızca görev tanımı. Bitirme projesi (dijital pazarlama planı) ilgili ama yöntem ve çıktı belirsiz.\nAdım 3 – Kıdem: yeni mezun pozisyonu için uygun seviye.\nAdım 4 – Organik sosyal medya için umut verici; ücretli reklam ve analitik tarafı kanıtlanmamış, bu rolün yarısı bu işlerden oluşuyor.",
+  "agent": "Hiring Manager",
+  "score": 52,
+  "verdict": "Organik sosyal medya tarafında umut verici bir aday, ancak rolün önemli bir kısmını oluşturan ücretli reklam ve GA4 raporlama becerileri CV'de kanıtlanmıyor.",
+  "strengths": [
+    {"point": "Sosyal medyada ölçülebilir büyüme sağlamış.", "evidence": "Kulübün Instagram hesabını yönettim, takipçi sayısı 1.200'den 3.400'e çıktı."},
+    {"point": "Bitirme projesi doğrudan içerik planlama işine benziyor.", "evidence": "Hedef kitle analizi ve içerik takvimi hazırladım."}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Deneyim / Yetkinlikler", "evidence": "", "problem": "İş tanımının önemli bir bölümü Meta Ads ve Google Ads kampanyaları; CV'de bu konuda hiçbir kanıt yok.", "fix": "Stajda reklam paneline eriştiyseniz veya kampanya takibine destek olduysanız bunu yazın. Yoksa küçük bir bütçeyle kulüp etkinliği için gerçek bir kampanya yürütmek veya ücretsiz eğitimlerle sertifika almak bu açığı kapatır."},
+    {"severity": "medium", "section": "Bitirme Projesi", "evidence": "Hedef kitle analizi ve içerik takvimi hazırladım.", "problem": "En ilgili projeniz tek satırda kalmış; hangi kanalları, hangi verileri, hangi KPI'ları kullandığınız görünmüyor.", "fix": "2–3 madde ile genişletin: kullanılan kanallar, veri kaynakları (ör. Google Analytics), önerdiğiniz KPI'lar. Yalnızca gerçekten yaptıklarınızı yazın."},
+    {"severity": "medium", "section": "İş Deneyimi", "evidence": "Rakip analizi yaptım.", "problem": "İlan rakip analizi istiyor, ancak hangi rakipler, hangi yöntem ve hangi çıktı olduğu belirsiz.", "fix": "Analizin kapsamını ve sonucunu ekleyin: ör. '[N] rakibin sosyal medya içeriklerini karşılaştıran bir rapor hazırladım' — yalnızca doğruysa."}
+  ]
+}

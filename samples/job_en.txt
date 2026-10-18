@@ -1,0 +1,28 @@
+Junior Data Analyst — Anatolia Retail Analytics (fictional company), Istanbul (hybrid)
+
+About us
+Anatolia Retail Analytics helps mid-sized retail chains in Türkiye make better decisions with data. Our analytics team of 8 works with store, sales and inventory data from more than 300 stores.
+
+What you will do
+- Build and maintain recurring sales and inventory reports and dashboards for our retail clients.
+- Write SQL queries to extract and combine data from our PostgreSQL data warehouse.
+- Clean, validate and analyse large datasets using Python or Excel.
+- Present findings and recommendations to non-technical stakeholders.
+- Support senior analysts in ad-hoc analyses such as promotion performance and demand forecasting.
+
+Requirements
+- Bachelor's degree in Industrial Engineering, Statistics, Economics, Computer Science or a related field (new graduates welcome).
+- Solid SQL skills (joins, aggregations, window functions are a plus).
+- Experience with Python (pandas) or R for data analysis.
+- Experience with a BI tool such as Power BI or Tableau.
+- Advanced Excel.
+- Strong communication skills and ability to explain data to non-technical people.
+- Professional working proficiency in English.
+
+Nice to have
+- Experience with retail, FMCG or supply chain data.
+- Basic knowledge of statistics and forecasting methods.
+- Familiarity with Git.
+- Google Data Analytics or similar certificate.
+
+We offer a structured mentoring program for new graduates, hybrid working and private health insurance.

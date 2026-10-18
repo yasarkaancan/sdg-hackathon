@@ -1,0 +1,30 @@
+{
+  "agent": "ATS",
+  "score": 58,
+  "verdict": "Sosyal medya ve Canva gereksinimleri karşılanıyor, ancak Meta Ads/Google Ads ve GA4 gibi kritik anahtar kelimeler eksik veya zayıf olduğu için otomatik elemede risk var.",
+  "requirement_coverage": [
+    {"requirement": "İşletme, Pazarlama, İletişim veya ilgili bölümden yeni mezun", "priority": "must", "status": "met", "evidence": "Ege Kıyısı Üniversitesi (kurgusal) — İşletme Bölümü, 2019 - 2024"},
+    {"requirement": "Sosyal medya yönetimi deneyimi (staj/kulüp kabul)", "priority": "must", "status": "met", "evidence": "Kulübün Instagram hesabını yönettim, takipçi sayısı 1.200'den 3.400'e çıktı."},
+    {"requirement": "Google Analytics 4 bilgisi", "priority": "must", "status": "partial", "evidence": "Google Analytics (temel)"},
+    {"requirement": "Meta Ads veya Google Ads ile kampanya yönetimi", "priority": "must", "status": "missing", "evidence": ""},
+    {"requirement": "Canva veya benzeri tasarım araçları", "priority": "must", "status": "partial", "evidence": "MS Office, Canva, Instagram, Meta Business Suite, Google Analytics (temel)"},
+    {"requirement": "Verilerle çalışma ve analitik düşünme", "priority": "must", "status": "partial", "evidence": "Rakip analizi yaptım."},
+    {"requirement": "İyi derecede İngilizce", "priority": "must", "status": "partial", "evidence": "Yabancı Dil: İngilizce (B1), Portekizce (A2)"},
+    {"requirement": "Google Ads veya Meta Blueprint sertifikası", "priority": "nice", "status": "missing", "evidence": ""},
+    {"requirement": "E-ticaret deneyimi", "priority": "nice", "status": "missing", "evidence": ""},
+    {"requirement": "Video içerik üretimi (Reels, TikTok)", "priority": "nice", "status": "missing", "evidence": ""},
+    {"requirement": "Temel SEO bilgisi", "priority": "nice", "status": "missing", "evidence": ""}
+  ],
+  "missing_keywords": ["Meta Ads", "Google Ads", "GA4", "içerik takvimi (deneyimde)", "TikTok", "Reels", "e-posta pazarlama", "SEO", "e-ticaret"],
+  "strengths": [
+    {"point": "Sosyal medya deneyimi somut bir sonuçla destekleniyor.", "evidence": "Kulübün Instagram hesabını yönettim, takipçi sayısı 1.200'den 3.400'e çıktı."},
+    {"point": "Bölüm, ilanda aranan alanlarla birebir uyumlu.", "evidence": "İşletme Bölümü"}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Yetkinlikler", "evidence": "", "problem": "İlanın zorunlu gereksinimlerinden 'Meta Ads veya Google Ads ile kampanya yönetimi' CV'de hiç geçmiyor; ATS bu adayı bu kriterde eleyebilir.", "fix": "Stajda veya kulüpte reklam kampanyası kurduysanız ya da izlediyseniz bunu bir madde olarak ekleyin (platform, bütçe/hedef, sonuç). Hiç deneyiminiz yoksa ücretsiz Google Ads veya Meta Blueprint eğitimlerini tamamlayıp sertifikayı ekleyebilirsiniz. Yalnızca gerçekten yaptığınız şeyleri yazın."},
+    {"severity": "high", "section": "Yetkinlikler", "evidence": "Google Analytics (temel)", "problem": "İlan özellikle 'Google Analytics 4' istiyor; CV'de yalnızca 'Google Analytics (temel)' var ve hiçbir deneyimde kullanımı gösterilmiyor.", "fix": "GA4 kullandıysanız 'GA4' ifadesini açıkça yazın ve hangi raporu/analizi yaptığınızı bir maddede gösterin (ör. bitirme projesinde)."},
+    {"severity": "medium", "section": "İş Deneyimi", "evidence": "Şirketin Instagram hesabının yönetiminde yardımcı oldum.", "problem": "'İçerik takvimi', 'paylaşım planlama' gibi ilandaki ifadeler deneyim maddelerinde geçmiyor.", "fix": "Gerçekten yaptığınız işleri ilanın diliyle anlatın: ör. 'içerik takvimi hazırladım', 'paylaşımları planladım'."},
+    {"severity": "medium", "section": "Yabancı Dil", "evidence": "İngilizce (B1)", "problem": "İlan 'iyi derecede İngilizce' istiyor; B1 seviyesi bu gereksinimi kısmen karşılıyor.", "fix": "Erasmus deneyiminiz İngilizce kullanımınızı destekliyorsa bunu belirtin; sertifikalı bir sınav sonucunuz varsa ekleyin."},
+    {"severity": "low", "section": "Genel", "evidence": "PROJELER VE KULÜP ÇALIŞMALARI", "problem": "Standart dışı başlıklar bazı ATS sistemlerinde doğru sınıflandırılmayabilir.", "fix": "'Projeler' ve 'Gönüllü Çalışmalar / Kulüpler' olarak iki standart başlık kullanın."}
+  ]
+}

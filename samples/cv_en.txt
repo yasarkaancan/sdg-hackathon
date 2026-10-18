@@ -1,0 +1,46 @@
+Ece Yıldırım
+Junior Data Analyst Candidate
+Istanbul, Türkiye | ece.yildirim.example@mail.com | +90 532 418 27 63
+linkedin.com/in/ece-yildirim-example | github.com/eceyildirim-example
+Date of Birth: 14.03.2002 | Nationality: Turkish
+Marital Status: Single
+
+OBJECTIVE
+Hardworking and motivated recent graduate looking for a challenging position in a dynamic company where I can improve myself.
+
+EDUCATION
+B.Sc. Industrial Engineering, Marmara Technical University (fictional) — 09/2020 - June 2024
+GPA: 3.12 / 4.00
+Relevant courses: Statistics, Operations Research, Database Systems, Data Mining
+
+EXPERIENCE
+Intern, Supply Chain Department — Boğaziçi Gıda A.Ş. (fictional), Istanbul
+July 2023 - 09/2023
+- Responsible for preparing weekly stock reports in Excel.
+- Helped the team with data entry and cleaning of supplier data.
+- Attended meetings with the planning team.
+
+Part-time Sales Assistant — Kitapçı Store (fictional), Istanbul
+2021 - 2022
+- Worked at the cash register and helped customers.
+
+PROJECTS
+Graduation Project: Demand Forecasting for a Bakery Chain
+- Used Python (pandas) to analyse 2 years of daily sales data from 12 stores.
+- Built a forecasting model that was better than the old method.
+- Presented results to the company's operations manager.
+
+Personal Project: Istanbul Traffic Dashboard
+- Made a dashboard about Istanbul traffic data.
+
+SKILLS
+Excel (pivot tables, VLOOKUP), Python (pandas, matplotlib), SQL (basic), Power BI, Minitab
+Languages: Turkish (native), English (B2, IELTS 6.5)
+
+CERTIFICATES
+Google Data Analytics Professional Certificate (Coursera), 2024
+
+VOLUNTEERING
+Member of the university Data Science Club, organized 2 workshops for 40+ students.
+
+Military Status: Not applicable

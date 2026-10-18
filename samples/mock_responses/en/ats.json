@@ -1,0 +1,32 @@
+{
+  "agent": "ATS",
+  "score": 68,
+  "verdict": "Likely to pass a keyword screen for most core skills, but SQL and BI evidence is thin and 'PostgreSQL', 'dashboard' and 'Tableau' wording is missing.",
+  "requirement_coverage": [
+    {"requirement": "Bachelor's degree in Industrial Engineering, Statistics, Economics, CS or related", "priority": "must", "status": "met", "evidence": "B.Sc. Industrial Engineering, Marmara Technical University (fictional) — 09/2020 - June 2024"},
+    {"requirement": "Solid SQL skills (joins, aggregations)", "priority": "must", "status": "partial", "evidence": "SQL (basic)"},
+    {"requirement": "Python (pandas) or R for data analysis", "priority": "must", "status": "met", "evidence": "Used Python (pandas) to analyse 2 years of daily sales data from 12 stores."},
+    {"requirement": "Experience with a BI tool (Power BI or Tableau)", "priority": "must", "status": "partial", "evidence": "Excel (pivot tables, VLOOKUP), Python (pandas, matplotlib), SQL (basic), Power BI, Minitab"},
+    {"requirement": "Advanced Excel", "priority": "must", "status": "met", "evidence": "Responsible for preparing weekly stock reports in Excel."},
+    {"requirement": "Explaining data to non-technical stakeholders", "priority": "must", "status": "partial", "evidence": "Presented results to the company's operations manager."},
+    {"requirement": "Professional working proficiency in English", "priority": "must", "status": "met", "evidence": "English (B2, IELTS 6.5)"},
+    {"requirement": "Retail, FMCG or supply chain data experience", "priority": "nice", "status": "met", "evidence": "Intern, Supply Chain Department — Boğaziçi Gıda A.Ş. (fictional), Istanbul"},
+    {"requirement": "Basic statistics and forecasting methods", "priority": "nice", "status": "met", "evidence": "Graduation Project: Demand Forecasting for a Bakery Chain"},
+    {"requirement": "Familiarity with Git", "priority": "nice", "status": "partial", "evidence": "github.com/eceyildirim-example"},
+    {"requirement": "Google Data Analytics or similar certificate", "priority": "nice", "status": "met", "evidence": "Google Data Analytics Professional Certificate (Coursera), 2024"},
+    {"requirement": "SQL window functions", "priority": "nice", "status": "missing", "evidence": ""}
+  ],
+  "missing_keywords": ["PostgreSQL", "joins", "dashboard (in experience)", "Tableau", "data validation", "stakeholders", "Git"],
+  "strengths": [
+    {"point": "Python/pandas is backed by a concrete, retail-like project with real data volume.", "evidence": "Used Python (pandas) to analyse 2 years of daily sales data from 12 stores."},
+    {"point": "Relevant certificate that the posting explicitly lists as a plus.", "evidence": "Google Data Analytics Professional Certificate (Coursera), 2024"},
+    {"point": "Supply-chain internship matches the 'retail, FMCG or supply chain data' nice-to-have.", "evidence": "Intern, Supply Chain Department — Boğaziçi Gıda A.Ş. (fictional), Istanbul"}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Skills", "evidence": "SQL (basic)", "problem": "SQL is a core must-have ('solid SQL skills'), but the CV labels it 'basic' and never shows it used in a project or job. An ATS ranks this as weak or missing.", "fix": "If you have used SQL (e.g. in the Database Systems course or a project), add one bullet that shows it: what data, which operations (JOIN, GROUP BY) and for what. Remove the word 'basic' only if you can solve typical junior SQL tasks."},
+    {"severity": "high", "section": "Projects", "evidence": "Made a dashboard about Istanbul traffic data.", "problem": "Power BI appears only in the skills list; the one dashboard project does not name the tool, so the BI must-have is only partially evidenced.", "fix": "Name the tool and what the dashboard shows, e.g. 'Built a Power BI dashboard …' — only if it was really built in Power BI."},
+    {"severity": "medium", "section": "Overall", "evidence": "", "problem": "The keywords 'PostgreSQL', 'dashboard' (in an experience bullet) and 'data validation' from the posting do not appear anywhere.", "fix": "Where truthful, use the posting's wording in your bullets (e.g. 'cleaned and validated supplier data'). Add a keyword only if you genuinely have that skill."},
+    {"severity": "medium", "section": "Education / Experience", "evidence": "July 2023 - 09/2023", "problem": "Date formats are mixed ('July 2023', '09/2023', '2021 - 2022'), which can confuse ATS date parsing.", "fix": "Use one format everywhere, e.g. 'Jul 2023 – Sep 2023'."},
+    {"severity": "low", "section": "Header", "evidence": "OBJECTIVE", "problem": "Many ATS and recruiters expect a 'Summary' or 'Profile' heading; 'Objective' with generic text adds no keywords.", "fix": "Rename to 'Summary' and include 2–3 posting keywords you can back up (SQL, Power BI, forecasting)."}
+  ]
+}

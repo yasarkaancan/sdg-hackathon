@@ -1,0 +1,20 @@
+{
+  "reasoning": "Agreement: ATS and Hiring Manager both flag SQL as the biggest gap (must-have, only 'basic' in skills). ATS, Hiring Manager and Coach all say the dashboard project lacks the tool and detail. Recruiter, Hiring Manager and Coach agree the forecasting result is vague. Recruiter and ATS both flag the generic objective. Conflict: Recruiter suggests shortening the retail job, Coach rewrites it — resolved by keeping it to one short line, since relevance to a data role is low. Ranking: SQL evidence first (core daily tool), then BI evidence, then quantified project result, then summary, then bullet verbs.",
+  "overall_summary": "You are a credible candidate for this junior data analyst role: your industrial engineering degree, supply-chain internship and a real forecasting project on 12 stores' sales data fit the job well. The main thing holding your CV back is that SQL and Power BI — tools you would use daily — are listed but never shown in action. Your best evidence is also described too vaguely. A few focused edits could make your CV much stronger for this posting.",
+  "fit_assessment": "moderate",
+  "top_actions": [
+    {"priority": 1, "action": "Show SQL in action: add a bullet to a project or course describing a real SQL task you did (tables, JOIN/GROUP BY, what question it answered). If you have none, build a small SQL analysis on an open retail dataset and link it on GitHub.", "why": "Solid SQL is a must-have and the job runs on a PostgreSQL warehouse; right now it is only listed as 'basic'.", "raised_by": ["ATS", "Hiring Manager"], "effort": "medium"},
+    {"priority": 2, "action": "Expand the Istanbul Traffic Dashboard into 1–2 bullets naming the BI tool you used, the data source and one insight it revealed.", "why": "The BI-tool requirement is only partially evidenced; this project can prove it if described properly.", "raised_by": ["ATS", "Hiring Manager", "Coach"], "effort": "low"},
+    {"priority": 3, "action": "Quantify the forecasting project: name the model and the error metric you measured (e.g. MAPE from [X%] to [Y%]) — only with real values.", "why": "It is your most relevant experience, but 'better than the old method' gives the reader nothing to judge.", "raised_by": ["Recruiter", "Hiring Manager", "Coach"], "effort": "low"},
+    {"priority": 4, "action": "Replace the generic objective with a 2-line 'Summary' naming the Junior Data Analyst role and your two strongest proofs (forecasting project, Google Data Analytics certificate).", "why": "It is the first thing a recruiter reads and currently adds no keywords or evidence.", "raised_by": ["Recruiter", "ATS"], "effort": "low"},
+    {"priority": 5, "action": "Rewrite internship bullets to start with action verbs and use the posting's wording where true (e.g. 'Cleaned and validated supplier data…'); delete 'Attended meetings…' and use one date format throughout.", "why": "Duty-style bullets and mixed date formats weaken both the ATS match and the first impression.", "raised_by": ["Coach", "Recruiter", "ATS"], "effort": "low"}
+  ],
+  "conflicts": [
+    {"topic": "Part-time sales job", "resolution": "Keep it, but as one short line: it shows work experience, yet it is not relevant enough to a data role to deserve more space."}
+  ],
+  "keep_doing": [
+    "Using real numbers for scope, as in '2 years of daily sales data from 12 stores'.",
+    "Listing the Google Data Analytics certificate, which the posting names as a plus.",
+    "Showing initiative outside class, like organising workshops in the Data Science Club."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "agent": "Recruiter",
+  "score": 57,
+  "verdict": "Düzenli ve kısa bir CV, ancak genel kariyer hedefi ve görev odaklı maddeler nedeniyle en güçlü yön olan kulüp sosyal medya başarısı ilk bakışta gözden kaçıyor.",
+  "strengths": [
+    {"point": "Tek sayfa, net bölümler; hızlı taranabiliyor.", "evidence": "İŞ DENEYİMİ"},
+    {"point": "Ölçülebilir bir başarı var ve doğrudan ilanla ilgili.", "evidence": "Kulübün Instagram hesabını yönettim, takipçi sayısı 1.200'den 3.400'e çıktı."},
+    {"point": "Uluslararası deneyim uyum ve iletişim becerisine işaret ediyor.", "evidence": "Erasmus+ Değişim Programı, Lizbon, Portekiz — Güz 2022"}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Kariyer Hedefi", "evidence": "Kendimi geliştirebileceğim, dinamik ve yenilikçi bir şirkette kariyerime başlamak istiyorum.", "problem": "Bu cümle herhangi bir aday için yazılmış olabilir; hedef pozisyonu (dijital pazarlama) veya tek bir yetkinliği belirtmiyor.", "fix": "Pozisyonu ve en güçlü iki kanıtınızı içeren 2 satırlık bir özet yazın: ör. 'Dijital pazarlamaya odaklanan İşletme mezunu; kulüp Instagram hesabının takipçi sayısını 1.200'den 3.400'e çıkardım, Google Dijital Atölye sertifikam var.'"},
+    {"severity": "medium", "section": "İş Deneyimi", "evidence": "Instagram hesabını yöneterek etkileşimi %40 artırdım", "problem": "Staj maddeleri belirsiz; ne yaptığınız ve sonucu anlaşılmıyor.", "fix": "Her maddeye somut eylem ve (biliniyorsa) sonuç ekleyin."},
+    {"severity": "medium", "section": "Referanslar", "evidence": "İstendiğinde verilecektir.", "problem": "Bu satır yer kaplıyor ve bilgi vermiyor; işverenler zaten istendiğinde referans verileceğini varsayar.", "fix": "Bu bölümü kaldırın ve kazandığınız yeri ilgili bir proje veya beceri için kullanın."},
+    {"severity": "low", "section": "Kişisel Bilgiler", "evidence": "Ehliyet: B sınıfı", "problem": "Ehliyet bu pozisyon için gerekli değil ve CV'nin en üstünde değerli alanı kaplıyor.", "fix": "Pozisyonun gerektirmediği bilgileri CV'nin üst kısmından çıkarın."}
+  ]
+}

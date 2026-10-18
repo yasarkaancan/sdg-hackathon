@@ -1,0 +1,21 @@
+{
+  "agent": "Coach",
+  "score": 55,
+  "verdict": "Your project bullets have good raw material, but most experience bullets describe duties instead of actions and results.",
+  "rewrites": [
+    {"original": "Responsible for preparing weekly stock reports in Excel.", "improved": "Prepared weekly stock reports in Excel (pivot tables, VLOOKUP) for the supply chain team, covering [number of SKUs/stores] and used in [weekly planning meetings].", "why": "Starts with an action verb, names the tools you already list and shows scope. Fill in the brackets only with true details; otherwise remove them."},
+    {"original": "Helped the team with data entry and cleaning of supplier data.", "improved": "Cleaned and validated supplier data for [number] suppliers, fixing [type of errors, e.g. duplicates and missing codes] to improve report accuracy.", "why": "'Helped with' hides your contribution. 'Cleaned and validated' matches the job posting's wording — use it only if it describes what you did."},
+    {"original": "Built a forecasting model that was better than the old method.", "improved": "Built a [model type] demand forecasting model in Python that reduced forecast error (MAPE) from [X%] to [Y%] compared with the previous method.", "why": "Turns a vague claim into a measurable result. Use the real metric and values from your project; if you did not measure them, describe the method instead."},
+    {"original": "Made a dashboard about Istanbul traffic data.", "improved": "Built a [tool, e.g. Power BI] dashboard visualising [data source] Istanbul traffic data to show [key insight, e.g. peak congestion hours by district].", "why": "Names the tool, the data and the insight — this is what the BI requirement asks for. Only name a tool you actually used."},
+    {"original": "Worked at the cash register and helped customers.", "improved": "Handled daily cash transactions and customer requests in a busy bookstore, serving around [N] customers per shift.", "why": "Shorter and more concrete; keep it brief because it is less relevant to a data role."}
+  ],
+  "strengths": [
+    {"point": "Your volunteering bullet already shows a concrete result.", "evidence": "Member of the university Data Science Club, organized 2 workshops for 40+ students."},
+    {"point": "The project bullet gives scope with real numbers.", "evidence": "Used Python (pandas) to analyse 2 years of daily sales data from 12 stores."}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Experience", "evidence": "Responsible for preparing weekly stock reports in Excel.", "problem": "'Responsible for' describes a duty, not what you achieved.", "fix": "Start each bullet with an action verb (Prepared, Built, Analysed, Automated) and end with a result or scope."},
+    {"severity": "medium", "section": "Projects", "evidence": "Built a forecasting model that was better than the old method.", "problem": "'Better' is unmeasured, so the strongest project ends on a weak note.", "fix": "Add the measured improvement or describe the method, as in the suggested rewrite."},
+    {"severity": "low", "section": "Experience", "evidence": "Attended meetings with the planning team.", "problem": "Passive, low-value bullet.", "fix": "Remove it, or replace it with a concrete contribution you made."}
+  ]
+}

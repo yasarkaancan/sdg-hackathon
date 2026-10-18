@@ -1,0 +1,28 @@
+{
+  "job_title": "Dijital Pazarlama Uzman Yardımcısı",
+  "seniority": "junior",
+  "must_have": [
+    {"requirement": "İşletme, Pazarlama, İletişim veya ilgili bölümden yeni mezun", "keywords": ["İşletme", "Pazarlama", "İletişim", "lisans"]},
+    {"requirement": "Sosyal medya yönetimi deneyimi (staj/kulüp kabul)", "keywords": ["sosyal medya", "Instagram", "içerik takvimi", "social media"]},
+    {"requirement": "Google Analytics 4 bilgisi", "keywords": ["Google Analytics 4", "GA4", "Google Analytics"]},
+    {"requirement": "Meta Ads veya Google Ads ile kampanya yönetimi", "keywords": ["Meta Ads", "Google Ads", "reklam kampanyası", "Facebook Ads"]},
+    {"requirement": "Canva veya benzeri tasarım araçları", "keywords": ["Canva", "Photoshop", "tasarım"]},
+    {"requirement": "Verilerle çalışma ve analitik düşünme", "keywords": ["analiz", "raporlama", "Excel", "veri"]},
+    {"requirement": "İyi derecede İngilizce", "keywords": ["İngilizce", "English"]}
+  ],
+  "nice_to_have": [
+    {"requirement": "Google Ads veya Meta Blueprint sertifikası", "keywords": ["Google Ads sertifikası", "Meta Blueprint"]},
+    {"requirement": "E-ticaret deneyimi", "keywords": ["e-ticaret", "e-commerce"]},
+    {"requirement": "Video içerik üretimi (Reels, TikTok)", "keywords": ["Reels", "TikTok", "video"]},
+    {"requirement": "Temel SEO bilgisi", "keywords": ["SEO", "arama motoru optimizasyonu"]}
+  ],
+  "responsibilities": [
+    "Instagram, TikTok ve LinkedIn için içerik takvimi hazırlamak ve paylaşımları yönetmek",
+    "Meta Ads ve Google Ads kampanyalarının kurulumuna ve takibine destek olmak",
+    "GA4 ile trafik ve kampanya performansını raporlamak",
+    "E-posta bülteni kampanyaları hazırlamak",
+    "Rakip ve pazar analizleri yapmak"
+  ],
+  "soft_skills": ["Analitik düşünme", "Verilerle çalışmayı sevmek"],
+  "language_requirements": ["İyi derecede İngilizce"]
+}

@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV Review Board</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍⚖️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (window.tailwind) tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: { sdg8: '#A21942', brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 900: '#1e1b4b' } },
+        },
+      },
+    };
+  </script>
+  <style>
+    .spinner { border: 3px solid #e0e7ff; border-top-color: #4f46e5; border-radius: 9999px; width: 22px; height: 22px; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fade-in { animation: fade .45s ease-out both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .ring-track { stroke: #e5e7eb; }
+    .ring-bar { transition: stroke-dashoffset 1.2s ease-out; transform: rotate(-90deg); transform-origin: 50% 50%; }
+    mark.ph { background: #fef08a; color: #713f12; padding: 0 .2em; border-radius: .25rem; font-weight: 600; }
+    details > summary { cursor: pointer; list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    .tab-active { background: #4f46e5; color: white; }
+    textarea { resize: vertical; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-gradient-to-r from-brand-900 via-brand-700 to-sdg8 text-white">
+  <div class="max-w-6xl mx-auto px-5 py-6 flex flex-wrap items-center gap-4 justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center text-2xl">🧑‍⚖️</div>
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight">CV Review Board</h1>
+        <p class="text-sm text-white/80" data-i18n="tagline"></p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-semibold bg-sdg8 border border-white/30 rounded-full px-3 py-1" data-i18n="sdgBadge"></span>
+      <span id="demoBadge" class="hidden text-xs font-semibold bg-amber-400 text-amber-950 rounded-full px-3 py-1 cursor-help" data-i18n="demoMode"></span>
+      <div class="flex bg-white/15 rounded-full p-1 text-sm font-semibold" role="group" aria-label="language">
+        <button id="langEn" class="px-3 py-1 rounded-full" onclick="setLang('en')">EN</button>
+        <button id="langTr" class="px-3 py-1 rounded-full" onclick="setLang('tr')">TR</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-5 py-8 space-y-8">
+
+  <!-- ================= INPUT ================= -->
+  <section id="inputSection" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-2" for="jobText">1 · <span data-i18n="jobLabel"></span></label>
+        <textarea id="jobText" rows="13" class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" data-i18n-ph="jobPh"></textarea>
+        <p class="text-xs text-slate-400 mt-1"><span id="jobCount">0</span> / 15000</p>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-sm font-bold text-slate-700">2 · <span data-i18n="cvLabel"></span></label>
+          <div class="flex bg-slate-100 rounded-lg p-1 text-xs font-semibold">
+            <button id="tabFile" class="px-3 py-1 rounded-md" onclick="setCvMode('file')" data-i18n="tabUpload"></button>
+            <button id="tabPaste" class="px-3 py-1 rounded-md" onclick="setCvMode('paste')" data-i18n="tabPaste"></button>
+          </div>
+        </div>
+        <div id="cvFilePane">
+          <label id="dropZone" for="cvFile" class="flex flex-col items-center justify-center h-[17.5rem] rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 hover:bg-brand-50 hover:border-brand-500 transition cursor-pointer text-center px-4">
+            <div class="text-4xl mb-2">📄</div>
+            <p class="font-semibold text-slate-700" data-i18n="dropText"></p>
+            <p class="text-xs text-slate-500 mt-1" data-i18n="dropHint"></p>
+            <p id="fileName" class="hidden mt-3 text-sm font-semibold text-brand-700 bg-brand-100 rounded-full px-3 py-1"></p>
+          </label>
+          <input id="cvFile" type="file" accept=".pdf,.docx,.txt" class="hidden" />
+        </div>
+        <div id="cvPastePane" class="hidden">
+          <textarea id="cvText" rows="13" class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none" data-i18n-ph="cvPh"></textarea>
+          <p class="text-xs text-slate-400 mt-1"><span id="cvCount">0</span> / 15000</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3 justify-between">
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-sm font-semibold text-slate-600" data-i18n="outLang"></span>
+        <div class="flex bg-slate-100 rounded-lg p-1 text-sm font-semibold">
+          <button id="outEn" class="px-3 py-1 rounded-md" onclick="setLang('en')">English</button>
+          <button id="outTr" class="px-3 py-1 rounded-md" onclick="setLang('tr')">Türkçe</button>
+        </div>
+        <div class="relative">
+          <button id="exampleBtn" onclick="toggleExamples()" class="text-sm font-semibold text-brand-700 hover:bg-brand-50 border border-brand-100 rounded-lg px-3 py-2">✨ <span data-i18n="loadExample"></span></button>
+          <div id="exampleMenu" class="hidden absolute z-10 mt-1 w-72 bg-white border border-slate-200 rounded-xl shadow-lg p-1"></div>
+        </div>
+      </div>
+      <button id="reviewBtn" onclick="startReview()" class="bg-brand-600 hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl px-6 py-3 shadow-md shadow-brand-500/30 transition">
+        <span data-i18n="review"></span> →
+      </button>
+    </div>
+    <div id="inputError" class="hidden mt-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm p-3"></div>
+  </section>
+
+  <!-- ================= PROGRESS ================= -->
+  <section id="progressSection" class="hidden">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+      <h2 id="boardLine" class="text-lg font-bold text-slate-800 flex items-center gap-2"></h2>
+      <ol id="stages" class="flex items-center gap-2 text-xs font-semibold"></ol>
+    </div>
+    <div id="agentCards" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    <div id="streamWarnings" class="mt-4 space-y-2"></div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section id="results" class="hidden space-y-8"></section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-5 py-6 text-xs text-slate-500 leading-relaxed">
+    <p class="font-semibold text-slate-600 mb-1">⚠️ <span data-i18n="disclaimerTitle"></span></p>
+    <p data-i18n="disclaimer"></p>
+    <p class="mt-2">SDG 8.5 · 8.6 · 10.2 — Samsung Innovation Campus · Generative AI for the SDGs</p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   i18n — every UI string lives here
+   ===================================================================== */
+const I18N = {
+  en: {
+    tagline: 'A board of AI reviewers gives you recruiter-quality feedback for one specific job — free.',
+    sdgBadge: 'SDG 8 · Decent Work', demoMode: 'DEMO MODE · mock responses',
+    demoHint: 'No DeepSeek API key configured: the app returns pre-recorded sample responses. Load an example to see a consistent demo.',
+    demoMismatch: 'Demo mode returns pre-recorded responses for the sample CVs, so quotes will not match your own CV (they will show as unverified). Add a DeepSeek API key for real reviews.',
+    jobLabel: 'Paste the job posting', jobPh: 'Paste the full job posting here (title, responsibilities, requirements)…',
+    cvLabel: 'Your CV', tabUpload: 'Upload file', tabPaste: 'Paste text',
+    dropText: 'Click to upload or drop your CV here', dropHint: 'PDF, DOCX or TXT · max 5 MB',
+    cvPh: 'Paste the text of your CV here…', outLang: 'Feedback language:', loadExample: 'Load example',
+    review: 'Review my CV', reviewing: 'Reviewing…',
+    boardReviewing: 'The board is reviewing your CV…', boardDone: 'The board has finished its review',
+    stage_preprocess: 'Privacy filter', stage_parse_job: 'Read job', stage_agents: 'Reviewers', stage_aggregate: 'Synthesis',
+    waiting: 'Waiting…', running: 'Reviewing…', failed: 'Failed',
+    agent_ats: 'ATS & Keyword Screener', agent_recruiter: 'HR Recruiter', agent_hiring_manager: 'Hiring Manager', agent_coach: 'Impact & Writing Coach',
+    desc_ats: 'Do you match the requirements & keywords?', desc_recruiter: 'The 6-second first impression',
+    desc_hiring_manager: 'Can you actually do this job?', desc_coach: 'Rewrites your bullets with impact',
+    overall: 'Overall score', mustHave: 'Must-have coverage', fit: 'Fit', fit_strong: 'Strong fit', fit_moderate: 'Moderate fit', fit_weak: 'Weak fit',
+    verification: 'Verified quotes', verificationHint: 'Share of reviewer quotes that our code found word-for-word in your CV (anti-hallucination check).',
+    scoreHow: 'How is this score computed?', scoreNote: 'Computed in code, not by the AI. It is a heuristic for how well your CV presents you for this posting — not a prediction of whether you will be hired.',
+    redistributed: 'Some reviewers failed; their weight was redistributed over the others.',
+    summary: 'Board summary', topActions: 'Your top 5 actions', topActionsSub: 'Ordered by impact on getting an interview for this job',
+    raisedBy: 'Raised by', effort_low: 'Quick win', effort_medium: 'Medium effort', effort_high: 'Bigger effort',
+    conflicts: 'Where reviewers disagreed', keepDoing: 'Keep doing', reasoning: 'Reasoning', boardReasoning: 'How the board decided',
+    coverage: 'Requirement coverage', req: 'Requirement', status: 'Status', evidence: 'Evidence from your CV',
+    met: 'Met', partial: 'Partial', missing: 'Missing', must: 'Must', nice: 'Nice', missingKeywords: 'Keywords not found in your CV',
+    keywordNote: 'Add a keyword only if you genuinely have that skill — recruiters will ask about it in the interview.',
+    rewrites: 'Before → After rewrites', before: 'Before', after: 'After',
+    rewriteWarn: 'Highlighted [placeholders] are things only you know. Fill them in only if they are true and you can explain them in an interview — otherwise delete that part. Never add achievements you did not have.',
+    newNumbers: 'Contains numbers not found in your CV — double-check they are true:',
+    agentsDetail: 'Detailed reviews', strengths: 'Strengths', issues: 'Issues', sev_high: 'High', sev_medium: 'Medium', sev_low: 'Low',
+    fix: 'Fix', verified: '✓ verified quote', unverified: '⚠ unverified quote',
+    unverifiedHint: 'Our code could not find this quote in your CV. The reviewer may have paraphrased or invented it — treat this point with caution.',
+    missingItem: 'something missing', noItems: 'Nothing reported.',
+    privacy: 'Removed before analysis', privacyIntro: 'Before anything was sent to the AI, we removed these details from your CV on this server:',
+    privacyNote: 'Many international recruiters advise leaving personal details such as date of birth, marital status or photo off a CV, as they are not related to job fit. The final decision is yours.',
+    privacyNone: 'No personal details were detected.', showRedacted: 'Show exactly what the AI saw',
+    download: 'Download report (.md)', newReview: 'New review',
+    errMissingJob: 'Please paste the job posting.', errMissingCv: 'Please upload your CV or paste its text.',
+    errApi: 'Something went wrong while contacting the server:', partialFail: 'reviewer could not complete; results from the other reviewers are shown.',
+    aggFail: 'The synthesis step failed, so the top-actions list is unavailable. The individual reviews below are still valid.',
+    jobParseFail: 'The job posting could not be structured; reviewers used the raw posting text.',
+    jobDetected: 'Role detected', disclaimerTitle: 'Please read',
+    disclaimer: 'This feedback is generated by AI and may contain errors. The score is a heuristic, not a prediction of any hiring decision. Only add information to your CV that is true. Your CV text (after personal details are removed) is sent to the DeepSeek API — a third-party service whose servers may be outside Türkiye — for processing. This app does not store or log your CV. Do not upload sensitive documents.',
+    reportTitle: 'CV Review Board — Report', generated: 'Generated',
+  },
+  tr: {
+    tagline: 'Yapay zekâ değerlendirme kurulu, belirli bir ilan için işe alım uzmanı kalitesinde ücretsiz geri bildirim verir.',
+    sdgBadge: 'SKA 8 · İnsana Yakışır İş', demoMode: 'DEMO MODU · örnek yanıtlar',
+    demoHint: 'DeepSeek API anahtarı tanımlı değil: uygulama önceden kaydedilmiş örnek yanıtlar döndürür. Tutarlı bir demo için örnek yükleyin.',
+    demoMismatch: 'Demo modu örnek CV\'ler için kaydedilmiş yanıtlar döndürür; alıntılar sizin CV\'nizle eşleşmez (doğrulanmamış görünür). Gerçek değerlendirme için DeepSeek API anahtarı ekleyin.',
+    jobLabel: 'İş ilanını yapıştırın', jobPh: 'İlanın tamamını buraya yapıştırın (pozisyon, iş tanımı, aranan nitelikler)…',
+    cvLabel: 'CV\'niz', tabUpload: 'Dosya yükle', tabPaste: 'Metin yapıştır',
+    dropText: 'Yüklemek için tıklayın veya CV\'nizi buraya bırakın', dropHint: 'PDF, DOCX veya TXT · en fazla 5 MB',
+    cvPh: 'CV metninizi buraya yapıştırın…', outLang: 'Geri bildirim dili:', loadExample: 'Örnek yükle',
+    review: 'CV\'mi değerlendir', reviewing: 'Değerlendiriliyor…',
+    boardReviewing: 'Kurul CV\'nizi değerlendiriyor…', boardDone: 'Kurul değerlendirmesini tamamladı',
+    stage_preprocess: 'Gizlilik filtresi', stage_parse_job: 'İlan analizi', stage_agents: 'Değerlendiriciler', stage_aggregate: 'Sentez',
+    waiting: 'Bekliyor…', running: 'Değerlendiriyor…', failed: 'Başarısız',
+    agent_ats: 'ATS & Anahtar Kelime Tarayıcı', agent_recruiter: 'İK Uzmanı', agent_hiring_manager: 'İşe Alım Yöneticisi', agent_coach: 'Etki & Yazım Koçu',
+    desc_ats: 'Gereksinimleri ve anahtar kelimeleri karşılıyor musunuz?', desc_recruiter: '6 saniyelik ilk izlenim',
+    desc_hiring_manager: 'Bu işi gerçekten yapabilir misiniz?', desc_coach: 'Maddelerinizi etkili şekilde yeniden yazar',
+    overall: 'Genel puan', mustHave: 'Zorunlu nitelik karşılama', fit: 'Uyum', fit_strong: 'Güçlü uyum', fit_moderate: 'Orta uyum', fit_weak: 'Zayıf uyum',
+    verification: 'Doğrulanan alıntılar', verificationHint: 'Değerlendiricilerin alıntılarından kodumuzun CV\'nizde birebir bulduğu oran (halüsinasyon kontrolü).',
+    scoreHow: 'Bu puan nasıl hesaplanıyor?', scoreNote: 'Yapay zekâ değil, kod tarafından hesaplanır. CV\'nizin bu ilan için sizi ne kadar iyi yansıttığına dair bir göstergedir — işe alınıp alınmayacağınızın tahmini değildir.',
+    redistributed: 'Bazı değerlendiriciler başarısız oldu; ağırlıkları diğerlerine dağıtıldı.',
+    summary: 'Kurul özeti', topActions: 'En önemli 5 adımınız', topActionsSub: 'Bu ilanda mülakata çağrılma şansınıza etkisine göre sıralandı',
+    raisedBy: 'Belirten', effort_low: 'Hızlı kazanım', effort_medium: 'Orta efor', effort_high: 'Büyük efor',
+    conflicts: 'Değerlendiricilerin ayrıştığı noktalar', keepDoing: 'Böyle devam edin', reasoning: 'Gerekçe', boardReasoning: 'Kurul nasıl karar verdi',
+    coverage: 'Nitelik karşılama tablosu', req: 'Nitelik', status: 'Durum', evidence: 'CV\'nizdeki kanıt',
+    met: 'Karşılıyor', partial: 'Kısmen', missing: 'Eksik', must: 'Zorunlu', nice: 'Artı', missingKeywords: 'CV\'nizde bulunmayan anahtar kelimeler',
+    keywordNote: 'Bir anahtar kelimeyi yalnızca o beceriye gerçekten sahipseniz ekleyin — mülakatta sorulacaktır.',
+    rewrites: 'Önce → Sonra yeniden yazımlar', before: 'Önce', after: 'Sonra',
+    rewriteWarn: 'Vurgulanan [yer tutucular] yalnızca sizin bildiğiniz bilgilerdir. Yalnızca doğruysa ve mülakatta açıklayabilecekseniz doldurun; aksi halde o kısmı silin. Yaşamadığınız başarıları asla eklemeyin.',
+    newNumbers: 'CV\'nizde bulunmayan sayılar içeriyor — doğru olduğundan emin olun:',
+    agentsDetail: 'Detaylı değerlendirmeler', strengths: 'Güçlü yönler', issues: 'Sorunlar', sev_high: 'Yüksek', sev_medium: 'Orta', sev_low: 'Düşük',
+    fix: 'Öneri', verified: '✓ doğrulanmış alıntı', unverified: '⚠ doğrulanmamış alıntı',
+    unverifiedHint: 'Kodumuz bu alıntıyı CV\'nizde bulamadı. Değerlendirici alıntıyı değiştirmiş veya uydurmuş olabilir — bu noktaya temkinli yaklaşın.',
+    missingItem: 'eksik bir unsur', noItems: 'Bildirilen bir şey yok.',
+    privacy: 'Analizden önce çıkarılanlar', privacyIntro: 'Yapay zekâya herhangi bir şey gönderilmeden önce bu bilgiler sunucumuzda CV\'nizden çıkarıldı:',
+    privacyNote: 'Birçok uluslararası işe alım uzmanı; doğum tarihi, medeni hal veya fotoğraf gibi kişisel bilgilerin işe uygunlukla ilgili olmadığı için CV\'ye eklenmemesini önerir. Son karar sizindir.',
+    privacyNone: 'Kişisel bilgi tespit edilmedi.', showRedacted: 'Yapay zekânın tam olarak ne gördüğünü göster',
+    download: 'Raporu indir (.md)', newReview: 'Yeni değerlendirme',
+    errMissingJob: 'Lütfen iş ilanını yapıştırın.', errMissingCv: 'Lütfen CV\'nizi yükleyin veya metnini yapıştırın.',
+    errApi: 'Sunucuyla iletişimde bir sorun oluştu:', partialFail: 'değerlendirici tamamlanamadı; diğer değerlendiricilerin sonuçları gösteriliyor.',
+    aggFail: 'Sentez adımı başarısız oldu, bu yüzden öncelikli adımlar listesi yok. Aşağıdaki ayrı değerlendirmeler geçerlidir.',
+    jobParseFail: 'İlan yapılandırılamadı; değerlendiriciler ilanın ham metnini kullandı.',
+    jobDetected: 'Tespit edilen pozisyon', disclaimerTitle: 'Lütfen okuyun',
+    disclaimer: 'Bu geri bildirim yapay zekâ tarafından üretilmiştir ve hata içerebilir. Puan bir göstergedir, herhangi bir işe alım kararının tahmini değildir. CV\'nize yalnızca doğru bilgiler ekleyin. CV metniniz (kişisel bilgiler çıkarıldıktan sonra) işlenmek üzere sunucuları Türkiye dışında olabilecek üçüncü taraf bir hizmet olan DeepSeek API\'ye gönderilir. Bu uygulama CV\'nizi saklamaz veya kaydetmez (KVKK). Hassas belgeler yüklemeyin.',
+    reportTitle: 'CV Değerlendirme Kurulu — Rapor', generated: 'Oluşturulma',
+  },
+};
+
+const AGENTS = [
+  { key: 'ats', icon: '🤖', tech: 'zero-shot + rubric' },
+  { key: 'recruiter', icon: '👔', tech: 'few-shot' },
+  { key: 'hiring_manager', icon: '🧠', tech: 'chain-of-thought' },
+  { key: 'coach', icon: '✍️', tech: 'few-shot' },
+];
+const SHORT = { ats: 'ATS', recruiter: 'Recruiter', hiring_manager: 'Hiring Manager', coach: 'Coach' };
+const STAGES = ['preprocess', 'parse_job', 'agents', 'aggregate'];
+
+let lang = 'en';
+let cvMode = 'file';
+let cvFile = null;
+let samples = [];
+let usedSample = false;
+let health = { mock: false };
+let state = null;   // { stage, agents:{}, errors:{}, redactions, cvRedacted, job, final, warnings:[] , done }
+
+/* ---------------- helpers ---------------- */
+const $ = (id) => document.getElementById(id);
+const t = (k) => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+const highlightPlaceholders = (s) => esc(s).replace(/\[([^\]]+)\]/g, '<mark class="ph">[$1]</mark>');
+const pct = (x) => (x === null || x === undefined ? '—' : Math.round(x * 100) + '%');
+const scoreColor = (s) => (s >= 75 ? '#10b981' : s >= 55 ? '#f59e0b' : '#f43f5e');
+const scoreText = (s) => (s >= 75 ? 'text-emerald-600' : s >= 55 ? 'text-amber-600' : 'text-rose-600');
+
+/* ---------------- language ---------------- */
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach((el) => (el.textContent = t(el.dataset.i18n)));
+  document.querySelectorAll('[data-i18n-ph]').forEach((el) => (el.placeholder = t(el.dataset.i18nPh)));
+  for (const [id, v] of [['langEn', 'en'], ['langTr', 'tr']]) $(id).className = 'px-3 py-1 rounded-full ' + (lang === v ? 'bg-white text-brand-700' : 'text-white/80');
+  for (const [id, v] of [['outEn', 'en'], ['outTr', 'tr']]) $(id).className = 'px-3 py-1 rounded-md ' + (lang === v ? 'bg-white shadow text-brand-700' : 'text-slate-500');
+  $('demoBadge').title = t('demoHint');
+  setCvMode(cvMode);
+  renderExampleMenu();
+  if (state) { renderProgress(); if (state.final) renderResults(); }
+}
+
+/* ---------------- inputs ---------------- */
+function setCvMode(m) {
+  cvMode = m;
+  $('cvFilePane').classList.toggle('hidden', m !== 'file');
+  $('cvPastePane').classList.toggle('hidden', m !== 'paste');
+  $('tabFile').className = 'px-3 py-1 rounded-md ' + (m === 'file' ? 'bg-white shadow text-brand-700' : 'text-slate-500');
+  $('tabPaste').className = 'px-3 py-1 rounded-md ' + (m === 'paste' ? 'bg-white shadow text-brand-700' : 'text-slate-500');
+}
+function setFile(f) {
+  cvFile = f || null;
+  usedSample = false;
+  $('fileName').textContent = f ? '📎 ' + f.name : '';
+  $('fileName').classList.toggle('hidden', !f);
+}
+$('cvFile').addEventListener('change', (e) => setFile(e.target.files[0]));
+const dz = $('dropZone');
+['dragover', 'dragenter'].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.add('border-brand-500', 'bg-brand-50'); }));
+['dragleave', 'drop'].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.remove('border-brand-500', 'bg-brand-50'); }));
+dz.addEventListener('drop', (e) => { if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); });
+$('jobText').addEventListener('input', () => { $('jobCount').textContent = $('jobText').value.length; });
+$('cvText').addEventListener('input', () => { $('cvCount').textContent = $('cvText').value.length; usedSample = false; });
+
+function toggleExamples() { $('exampleMenu').classList.toggle('hidden'); }
+document.addEventListener('click', (e) => { if (!e.target.closest('#exampleBtn') && !e.target.closest('#exampleMenu')) $('exampleMenu').classList.add('hidden'); });
+function renderExampleMenu() {
+  $('exampleMenu').innerHTML = samples.map((s, i) =>
+    `<button class="w-full text-left text-sm px-3 py-2 rounded-lg hover:bg-brand-50" onclick="loadSample(${i})">${esc(s.label)}</button>`).join('');
+}
+function loadSample(i) {
+  const s = samples[i];
+  $('jobText').value = s.job; $('cvText').value = s.cv;
+  $('jobCount').textContent = s.job.length; $('cvCount').textContent = s.cv.length;
+  setFile(null); setCvMode('paste'); setLang(s.language);
+  usedSample = true;
+  $('exampleMenu').classList.add('hidden');
+}
+
+function showInputError(msg) {
+  $('inputError').textContent = msg;
+  $('inputError').classList.toggle('hidden', !msg);
+}
+
+/* =====================================================================
+   Review: POST + read newline-delimited JSON stream
+   ===================================================================== */
+async function startReview() {
+  showInputError('');
+  const job = $('jobText').value.trim();
+  const cvText = $('cvText').value.trim();
+  if (!job) return showInputError(t('errMissingJob'));
+  if (cvMode === 'file' ? !cvFile : !cvText) return showInputError(t('errMissingCv'));
+
+  const fd = new FormData();
+  fd.append('job_text', job);
+  fd.append('output_language', lang);
+  if (cvMode === 'file') fd.append('cv_file', cvFile); else fd.append('cv_text', cvText);
+
+  state = { stage: 'preprocess', agents: {}, errors: {}, redactions: [], cvRedacted: '', job: null, final: null, warnings: [], done: false, animated: {} };
+  $('reviewBtn').disabled = true;
+  $('reviewBtn').querySelector('span').textContent = t('reviewing');
+  $('results').classList.add('hidden');
+  $('progressSection').classList.remove('hidden');
+  renderProgress();
+  $('progressSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const resp = await fetch('/api/review', { method: 'POST', body: fd });
+    if (!resp.ok || !resp.body) throw new Error('HTTP ' + resp.status);
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      let nl;
+      while ((nl = buf.indexOf('\n')) >= 0) {
+        const line = buf.slice(0, nl).trim();
+        buf = buf.slice(nl + 1);
+        if (line) handleEvent(JSON.parse(line));
+      }
+    }
+    if (buf.trim()) handleEvent(JSON.parse(buf));
+  } catch (err) {
+    handleEvent({ type: 'error', message: t('errApi') + ' ' + err.message });
+  } finally {
+    $('reviewBtn').disabled = false;
+    $('reviewBtn').querySelector('span').textContent = t('review');
+    state.done = true;
+    renderProgress();
+  }
+}
+
+function handleEvent(ev) {
+  switch (ev.type) {
+    case 'stage': state.stage = ev.stage; break;
+    case 'redactions': state.redactions = ev.items; state.cvRedacted = ev.cv_redacted; break;
+    case 'job_parsed': state.job = ev.job; break;
+    case 'warning': state.warnings.push(ev.message === 'job_parse_failed' ? t('jobParseFail') : ev.message); break;
+    case 'agent_done':
+      if (ev.ok) state.agents[ev.agent] = ev.result; else state.errors[ev.agent] = ev.error;
+      break;
+    case 'final': state.final = ev.result; state.stage = 'done'; renderResults(); break;
+    case 'error':
+      state.error = ev.message; state.stage = 'error';
+      if (!Object.keys(state.agents).length) {
+        $('progressSection').classList.add('hidden');
+        showInputError(ev.message);
+        $('inputSection').scrollIntoView({ behavior: 'smooth' });
+      }
+      break;
+  }
+  renderProgress();
+}
+
+/* ---------------- progress UI ---------------- */
+function renderProgress() {
+  if (!state) return;
+  const finished = state.stage === 'done';
+  $('boardLine').innerHTML = finished
+    ? `<span class="text-emerald-600">✔</span> ${esc(t('boardDone'))}${state.final ? ` <span class="text-sm font-normal text-slate-400">· ${state.final.elapsed_s}s</span>` : ''}`
+    : state.stage === 'error' ? `<span class="text-rose-600">✖</span> ${esc(state.error || '')}`
+    : `<span class="spinner inline-block"></span> ${esc(t('boardReviewing'))}`;
+
+  const idx = STAGES.indexOf(state.stage);
+  $('stages').innerHTML = STAGES.map((s, i) => {
+    const doneS = finished || (idx > i);
+    const active = !finished && idx === i && state.stage !== 'error';
+    const cls = doneS ? 'bg-emerald-100 text-emerald-700' : active ? 'bg-brand-600 text-white animate-pulse' : 'bg-slate-200 text-slate-500';
+    return `<li class="rounded-full px-3 py-1 ${cls}">${doneS ? '✓ ' : ''}${esc(t('stage_' + s))}</li>`;
+  }).join('<li class="text-slate-300">›</li>');
+
+  $('agentCards').innerHTML = AGENTS.map((a) => {
+    const r = state.agents[a.key];
+    const err = state.errors[a.key];
+    const running = !r && !err && (idx >= 2 || finished) && state.stage !== 'error';
+    let body;
+    if (r) {
+      body = `<div class="flex items-end gap-2 mt-3"><span class="text-4xl font-extrabold ${scoreText(r.score)}">${r.score}</span><span class="text-slate-400 text-sm mb-1">/100</span></div>
+              <p class="text-xs text-slate-600 mt-2 line-clamp-3">${esc(r.verdict)}</p>`;
+    } else if (err) {
+      body = `<p class="mt-3 text-sm font-semibold text-rose-600">✖ ${esc(t('failed'))}</p><p class="text-xs text-slate-500 mt-1 line-clamp-3">${esc(err)}</p>`;
+    } else {
+      body = `<div class="flex items-center gap-2 mt-4 text-sm text-slate-500">${running ? '<span class="spinner"></span>' + esc(t('running')) : esc(t('waiting'))}</div>`;
+    }
+    const border = r ? 'border-emerald-200' : err ? 'border-rose-200' : running ? 'border-brand-200' : 'border-slate-200';
+    const animate = (r || err) && !state.animated[a.key];
+    if (r || err) state.animated[a.key] = true;
+    return `<div class="bg-white rounded-2xl border ${border} shadow-sm p-4 ${animate ? 'fade-in' : ''}">
+      <div class="flex items-start gap-3">
+        <div class="text-2xl">${a.icon}</div>
+        <div class="min-w-0">
+          <p class="font-bold text-sm leading-tight">${esc(t('agent_' + a.key))}</p>
+          <p class="text-xs text-slate-500">${esc(t('desc_' + a.key))}</p>
+        </div>
+      </div>
+      ${body}
+      <p lang="en" class="mt-3 text-[10px] uppercase tracking-wide text-slate-400">prompt: ${a.tech}</p>
+    </div>`;
+  }).join('');
+
+  const warn = [...state.warnings];
+  if (state.job && state.job.job_title && state.stage !== 'error') {
+    warn.unshift(`🎯 ${t('jobDetected')}: <b>${esc(state.job.job_title)}</b> · ${esc(state.job.seniority)} · ${state.job.must_have.length} must-have / ${state.job.nice_to_have.length} nice-to-have`);
+  }
+  $('streamWarnings').innerHTML = warn.map((w, i) => `<p class="text-sm ${i === 0 && state.job ? 'text-slate-600' : 'text-amber-700'}">${w.startsWith('🎯') ? w : esc(w)}</p>`).join('');
+}
+
+/* =====================================================================
+   Results
+   ===================================================================== */
+function card(inner, extra = '') { return `<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 fade-in ${extra}">${inner}</div>`; }
+function h2(text, sub = '') { return `<h2 class="text-xl font-extrabold text-slate-900">${esc(text)}</h2>${sub ? `<p class="text-sm text-slate-500 mt-0.5">${esc(sub)}</p>` : ''}`; }
+function badgeFor(item) {
+  if (item.verified === true) return `<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 rounded-full px-2 py-0.5 whitespace-nowrap">${esc(t('verified'))}</span>`;
+  if (item.verified === false) return `<span title="${esc(t('unverifiedHint'))}" class="cursor-help text-[11px] font-semibold text-amber-800 bg-amber-100 rounded-full px-2 py-0.5 whitespace-nowrap">${esc(t('unverified'))}</span>`;
+  return '';
+}
+function quote(item, field = 'evidence') {
+  const text = item[field];
+  if (!text) return '';
+  return `<div class="mt-2 flex flex-wrap items-start gap-2"><blockquote class="text-xs italic text-slate-600 border-l-4 ${item.verified === false ? 'border-amber-400' : 'border-brand-100'} pl-2 flex-1 min-w-[12rem]">“${esc(text)}”</blockquote>${badgeFor(item)}</div>`;
+}
+
+function renderResults() {
+  const R = state.final;
+  if (!R) return;
+  const S = R.scores;
+  const A = R.aggregate;
+  const parts = [];
+
+  // --- banners
+  const banners = [];
+  if (R.mock && !usedSample) banners.push(`<div class="rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm p-3">🧪 ${esc(t('demoMismatch'))}</div>`);
+  const failed = Object.keys(R.agent_errors || {});
+  if (failed.length) banners.push(`<div class="rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm p-3">⚠️ ${failed.map((k) => esc(t('agent_' + k))).join(', ')}: ${esc(t('partialFail'))}</div>`);
+  if (!A) banners.push(`<div class="rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm p-3">⚠️ ${esc(t('aggFail'))}</div>`);
+  if (banners.length) parts.push(`<div class="space-y-2">${banners.join('')}</div>`);
+
+  // --- 1. score header
+  const C = 2 * Math.PI * 52;
+  const ov = S.overall ?? 0;
+  const fit = A ? A.fit_assessment : null;
+  const fitCls = { strong: 'bg-emerald-100 text-emerald-800', moderate: 'bg-amber-100 text-amber-800', weak: 'bg-rose-100 text-rose-800' }[fit] || 'bg-slate-100 text-slate-600';
+  const breakdown = AGENTS.filter((a) => S.agent_scores[a.key] !== undefined).map((a) =>
+    `<tr><td class="pr-4">${esc(t('agent_' + a.key))}</td><td class="pr-4 text-right font-semibold">${S.agent_scores[a.key]}</td><td class="pr-4 text-right text-slate-400">× ${S.weights_used[a.key].toFixed(2)}</td><td class="text-right">= ${(S.agent_scores[a.key] * S.weights_used[a.key]).toFixed(1)}</td></tr>`).join('');
+  const mh = S.must_have;
+  parts.push(card(`
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="relative w-40 h-40 shrink-0">
+        <svg viewBox="0 0 120 120" class="w-40 h-40">
+          <circle cx="60" cy="60" r="52" fill="none" stroke-width="10" class="ring-track"/>
+          <circle id="ringBar" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" class="ring-bar"
+            stroke="${scoreColor(ov)}" stroke-dasharray="${C}" stroke-dashoffset="${C}"/>
+        </svg>
+        <div class="absolute inset-0 flex flex-col items-center justify-center">
+          <span class="text-5xl font-extrabold ${scoreText(ov)}">${S.overall ?? '—'}</span>
+          <span class="text-xs text-slate-500 font-semibold">${esc(t('overall'))}</span>
+        </div>
+      </div>
+      <div class="flex-1 w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="rounded-xl bg-slate-50 p-4"><p class="text-xs text-slate-500 font-semibold">${esc(t('mustHave'))}</p>
+            <p class="text-3xl font-extrabold text-slate-900">${pct(mh.coverage)}</p>
+            <p class="text-xs text-slate-500">✅ ${mh.met} · 🟡 ${mh.partial} · ❌ ${mh.missing}</p></div>
+          <div class="rounded-xl bg-slate-50 p-4"><p class="text-xs text-slate-500 font-semibold">${esc(t('fit'))}</p>
+            <p class="mt-2"><span class="inline-block text-sm font-bold rounded-full px-3 py-1 ${fitCls}">${fit ? esc(t('fit_' + fit)) : '—'}</span></p></div>
+          <div class="rounded-xl bg-slate-50 p-4" title="${esc(t('verificationHint'))}"><p class="text-xs text-slate-500 font-semibold">${esc(t('verification'))} ⓘ</p>
+            <p class="text-3xl font-extrabold text-slate-900">${pct(R.verification.rate)}</p>
+            <p class="text-xs text-slate-500">${R.verification.verified} / ${R.verification.checked}</p></div>
+        </div>
+        <details class="mt-4 text-sm">
+          <summary class="text-brand-700 font-semibold">ⓘ ${esc(t('scoreHow'))}</summary>
+          <div class="mt-2 text-slate-600">
+            <p class="font-mono text-xs bg-slate-50 rounded p-2">${esc(S.formula)}</p>
+            <table class="mt-2 text-xs">${breakdown}<tr class="border-t"><td class="pt-1 font-bold">${esc(t('overall'))}</td><td></td><td></td><td class="pt-1 text-right font-bold">${S.overall}</td></tr></table>
+            ${S.missing_agents.length ? `<p class="text-xs text-amber-700 mt-1">${esc(t('redistributed'))}</p>` : ''}
+            <p class="text-xs mt-2">${esc(t('scoreNote'))}</p>
+          </div>
+        </details>
+      </div>
+    </div>`));
+
+  // --- 2. hero: top actions
+  if (A) {
+    const effCls = { low: 'bg-emerald-100 text-emerald-800', medium: 'bg-amber-100 text-amber-800', high: 'bg-rose-100 text-rose-800' };
+    const actions = A.top_actions.map((x) => `
+      <div class="flex gap-4 p-4 rounded-xl border border-slate-200 hover:border-brand-500 transition bg-white fade-in">
+        <div class="w-10 h-10 shrink-0 rounded-full bg-brand-600 text-white font-extrabold flex items-center justify-center text-lg">${x.priority}</div>
+        <div class="min-w-0">
+          <p class="font-semibold text-slate-900">${esc(x.action)}</p>
+          <p class="text-sm text-slate-500 mt-1">${esc(x.why)}</p>
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span class="text-xs font-bold rounded-full px-2 py-0.5 ${effCls[x.effort]}">${esc(t('effort_' + x.effort))}</span>
+            <span class="text-xs text-slate-400">${esc(t('raisedBy'))}:</span>
+            ${x.raised_by.map((r) => `<span class="text-xs font-semibold bg-brand-50 text-brand-700 rounded-full px-2 py-0.5">${esc(r)}</span>`).join('')}
+          </div>
+        </div>
+      </div>`).join('');
+    parts.push(card(`
+      <div class="flex flex-col lg:flex-row gap-6">
+        <div class="lg:w-2/3">
+          ${h2('🚀 ' + t('topActions'), t('topActionsSub'))}
+          <div class="mt-4 space-y-3">${actions}</div>
+        </div>
+        <div class="lg:w-1/3 space-y-4">
+          <div class="rounded-xl bg-brand-50 p-4"><p class="text-xs font-bold text-brand-700 uppercase tracking-wide">${esc(t('summary'))}</p><p class="text-sm text-slate-700 mt-1">${esc(A.overall_summary)}</p></div>
+          ${A.keep_doing.length ? `<div class="rounded-xl bg-emerald-50 p-4"><p class="text-xs font-bold text-emerald-700 uppercase tracking-wide">💪 ${esc(t('keepDoing'))}</p><ul class="text-sm text-slate-700 mt-1 list-disc ml-4 space-y-1">${A.keep_doing.map((k) => `<li>${esc(k)}</li>`).join('')}</ul></div>` : ''}
+          ${A.conflicts.length ? `<div class="rounded-xl bg-amber-50 p-4"><p class="text-xs font-bold text-amber-700 uppercase tracking-wide">⚖️ ${esc(t('conflicts'))}</p>${A.conflicts.map((c) => `<p class="text-sm mt-1"><b>${esc(c.topic)}:</b> ${esc(c.resolution)}</p>`).join('')}</div>` : ''}
+          <details class="rounded-xl bg-slate-50 p-4 text-sm"><summary class="font-semibold text-slate-600">🧭 ${esc(t('boardReasoning'))}</summary><p class="mt-2 text-slate-600 whitespace-pre-line">${esc(A.reasoning)}</p></details>
+        </div>
+      </div>`, 'ring-2 ring-brand-100'));
+  }
+
+  // --- 3. requirement coverage
+  const ats = R.agents.ats;
+  if (ats) {
+    const icon = { met: '✅', partial: '🟡', missing: '❌' };
+    const rows = ats.requirement_coverage.map((rc) => `
+      <tr class="border-t border-slate-100 align-top">
+        <td class="py-2 pr-3"><span class="text-[10px] font-bold uppercase rounded px-1.5 py-0.5 ${rc.priority === 'must' ? 'bg-slate-800 text-white' : 'bg-slate-200 text-slate-600'}">${esc(t(rc.priority))}</span></td>
+        <td class="py-2 pr-3 font-medium">${esc(rc.requirement)}</td>
+        <td class="py-2 pr-3 whitespace-nowrap">${icon[rc.status]} ${esc(t(rc.status))}</td>
+        <td class="py-2">${rc.evidence ? `<span class="text-xs italic text-slate-600">“${esc(rc.evidence)}”</span> ${badgeFor(rc)}` : '<span class="text-slate-300">—</span>'}</td>
+      </tr>`).join('');
+    parts.push(card(`
+      ${h2('📋 ' + t('coverage'))}
+      <div class="overflow-x-auto mt-4"><table class="w-full text-sm">
+        <thead><tr class="text-left text-xs text-slate-500"><th class="pb-2"></th><th class="pb-2">${esc(t('req'))}</th><th class="pb-2">${esc(t('status'))}</th><th class="pb-2">${esc(t('evidence'))}</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      ${ats.missing_keywords.length ? `<div class="mt-5"><p class="text-sm font-bold text-slate-700">${esc(t('missingKeywords'))}</p>
+        <div class="flex flex-wrap gap-2 mt-2">${ats.missing_keywords.map((k) => `<span class="text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3 py-1">${esc(k)}</span>`).join('')}</div>
+        <p class="text-xs text-slate-500 mt-2">💡 ${esc(t('keywordNote'))}</p></div>` : ''}`));
+  }
+
+  // --- 4. rewrites
+  const coach = R.agents.coach;
+  if (coach && coach.rewrites.length) {
+    const rws = coach.rewrites.map((rw) => `
+      <div class="grid md:grid-cols-2 gap-3 fade-in">
+        <div class="rounded-xl bg-rose-50/60 border border-rose-100 p-4">
+          <div class="flex items-center justify-between gap-2"><p class="text-[11px] font-bold uppercase text-rose-600">${esc(t('before'))}</p>${badgeFor(rw)}</div>
+          <p class="text-sm text-slate-700 mt-1">${esc(rw.original)}</p>
+        </div>
+        <div class="rounded-xl bg-emerald-50/60 border border-emerald-100 p-4">
+          <p class="text-[11px] font-bold uppercase text-emerald-700">${esc(t('after'))}</p>
+          <p class="text-sm text-slate-900 mt-1 font-medium">${highlightPlaceholders(rw.improved)}</p>
+          <p class="text-xs text-slate-500 mt-2">${esc(rw.why)}</p>
+          ${rw.new_numbers.length ? `<p class="text-xs text-amber-800 bg-amber-100 rounded px-2 py-1 mt-2">⚠ ${esc(t('newNumbers'))} ${rw.new_numbers.map(esc).join(', ')}</p>` : ''}
+        </div>
+      </div>`).join('');
+    parts.push(card(`
+      ${h2('✍️ ' + t('rewrites'))}
+      <div class="mt-3 rounded-xl bg-yellow-50 border border-yellow-200 text-yellow-900 text-sm p-3">⚠️ ${esc(t('rewriteWarn'))}</div>
+      <div class="mt-4 space-y-4">${rws}</div>`));
+  }
+
+  // --- 5. agent tabs
+  const present = AGENTS.filter((a) => R.agents[a.key] || (R.agent_errors || {})[a.key]);
+  const tabs = present.map((a, i) => `<button data-tab="${a.key}" onclick="showTab('${a.key}')" class="agent-tab text-sm font-semibold rounded-lg px-3 py-2 ${i === 0 ? 'tab-active' : 'bg-slate-100 text-slate-600'}">${a.icon} ${esc(t('agent_' + a.key))}${R.agents[a.key] ? ` · ${R.agents[a.key].score}` : ' · ✖'}</button>`).join('');
+  const panels = present.map((a, i) => `<div data-panel="${a.key}" class="agent-panel ${i === 0 ? '' : 'hidden'}">${agentPanel(a.key, R.agents[a.key], (R.agent_errors || {})[a.key])}</div>`).join('');
+  parts.push(card(`${h2('🗂 ' + t('agentsDetail'))}<div class="flex flex-wrap gap-2 mt-4">${tabs}</div><div class="mt-5">${panels}</div>`));
+
+  // --- 6. privacy
+  parts.push(card(`
+    ${h2('🔒 ' + t('privacy'))}
+    ${R.redactions.length ? `<p class="text-sm text-slate-600 mt-2">${esc(t('privacyIntro'))}</p>
+      <div class="flex flex-wrap gap-2 mt-3">${R.redactions.map((r) => `<span class="text-xs font-semibold bg-slate-800 text-white rounded-full px-3 py-1">🚫 ${esc(r.label)}${r.count > 1 ? ' ×' + r.count : ''}</span>`).join('')}</div>`
+      : `<p class="text-sm text-slate-600 mt-2">${esc(t('privacyNone'))}</p>`}
+    <p class="text-xs text-slate-500 mt-3">${esc(t('privacyNote'))}</p>
+    <details class="mt-3"><summary class="text-sm font-semibold text-brand-700">👁 ${esc(t('showRedacted'))}</summary>
+      <pre class="mt-2 text-xs bg-slate-50 rounded-xl p-3 whitespace-pre-wrap max-h-80 overflow-auto">${esc(state.cvRedacted)}</pre></details>`));
+
+  // --- 7. actions
+  parts.push(`<div class="flex flex-wrap gap-3 justify-center">
+      <button onclick="downloadReport()" class="bg-slate-900 hover:bg-slate-700 text-white font-bold rounded-xl px-5 py-3">⬇️ ${esc(t('download'))}</button>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="bg-white border border-slate-300 hover:bg-slate-50 font-bold rounded-xl px-5 py-3">↺ ${esc(t('newReview'))}</button>
+    </div>`);
+
+  $('results').innerHTML = parts.join('');
+  $('results').classList.remove('hidden');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const bar = $('ringBar');
+    if (bar) bar.style.strokeDashoffset = String(C * (1 - ov / 100));
+  }));
+}
+
+function agentPanel(key, r, err) {
+  if (!r) return `<p class="text-sm text-rose-700">✖ ${esc(err || t('failed'))}</p>`;
+  const sevCls = { high: 'bg-rose-100 text-rose-800', medium: 'bg-amber-100 text-amber-800', low: 'bg-slate-100 text-slate-600' };
+  const groups = ['high', 'medium', 'low'].map((sev) => {
+    const items = r.issues.filter((i) => i.severity === sev);
+    if (!items.length) return '';
+    return `<div class="mt-4"><p class="text-xs font-bold uppercase tracking-wide"><span class="rounded-full px-2 py-0.5 ${sevCls[sev]}">${esc(t('sev_' + sev))} · ${items.length}</span></p>
+      <div class="mt-2 space-y-3">${items.map((i) => `
+        <div class="rounded-xl border border-slate-200 p-3">
+          <p class="text-sm"><span class="text-xs font-semibold text-slate-400">${esc(i.section)}</span></p>
+          <p class="text-sm font-medium text-slate-800">${esc(i.problem)}</p>
+          ${i.evidence ? quote(i) : `<p class="text-[11px] text-slate-400 mt-1 italic">(${esc(t('missingItem'))})</p>`}
+          ${i.fix ? `<p class="text-sm text-emerald-800 bg-emerald-50 rounded-lg px-3 py-2 mt-2"><b>${esc(t('fix'))}:</b> ${esc(i.fix)}</p>` : ''}
+        </div>`).join('')}</div></div>`;
+  }).join('');
+  return `
+    <div class="flex items-start gap-4">
+      <div class="text-4xl font-extrabold ${scoreText(r.score)}">${r.score}</div>
+      <p class="text-slate-700 font-medium pt-1">${esc(r.verdict)}</p>
+    </div>
+    ${r.analysis ? `<details class="mt-4 rounded-xl bg-brand-50 p-4"><summary class="text-sm font-semibold text-brand-700">🧠 ${esc(t('reasoning'))} (chain-of-thought)</summary><p class="mt-2 text-sm text-slate-700 whitespace-pre-line">${esc(r.analysis)}</p></details>` : ''}
+    <h3 class="mt-5 font-bold text-slate-800">💪 ${esc(t('strengths'))}</h3>
+    <div class="mt-2 grid md:grid-cols-2 gap-3">${r.strengths.length ? r.strengths.map((s) => `<div class="rounded-xl bg-emerald-50/60 border border-emerald-100 p-3"><p class="text-sm font-medium">${esc(s.point)}</p>${quote(s)}</div>`).join('') : `<p class="text-sm text-slate-400">${esc(t('noItems'))}</p>`}</div>
+    <h3 class="mt-5 font-bold text-slate-800">🔧 ${esc(t('issues'))}</h3>
+    ${groups || `<p class="text-sm text-slate-400">${esc(t('noItems'))}</p>`}`;
+}
+
+function showTab(key) {
+  document.querySelectorAll('.agent-tab').forEach((b) => { b.className = 'agent-tab text-sm font-semibold rounded-lg px-3 py-2 ' + (b.dataset.tab === key ? 'tab-active' : 'bg-slate-100 text-slate-600'); });
+  document.querySelectorAll('.agent-panel').forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== key));
+}
+
+/* ---------------- markdown report (client-side) ---------------- */
+function downloadReport() {
+  const R = state.final; const S = R.scores; const A = R.aggregate;
+  const L = [];
+  const v = (it) => (it.verified === false ? ` _(${t('unverified')})_` : '');
+  L.push(`# ${t('reportTitle')}`, '', `${t('generated')}: ${new Date().toLocaleString()}`, '');
+  if (R.job && R.job.job_title) L.push(`**${t('jobDetected')}:** ${R.job.job_title} (${R.job.seniority})`, '');
+  L.push(`| | |`, `|---|---|`, `| ${t('overall')} | **${S.overall ?? '—'} / 100** |`, `| ${t('mustHave')} | ${pct(S.must_have.coverage)} |`,
+    `| ${t('fit')} | ${A ? t('fit_' + A.fit_assessment) : '—'} |`, `| ${t('verification')} | ${pct(R.verification.rate)} (${R.verification.verified}/${R.verification.checked}) |`, '');
+  L.push(`> ${t('scoreNote')}`, `> ${S.formula}`, '');
+  if (A) {
+    L.push(`## ${t('summary')}`, '', A.overall_summary, '', `## ${t('topActions')}`, '');
+    A.top_actions.forEach((x) => L.push(`${x.priority}. **${x.action}**  `, `   ${x.why}  `, `   _${t('effort_' + x.effort)} · ${t('raisedBy')}: ${x.raised_by.join(', ')}_`, ''));
+    if (A.keep_doing.length) { L.push(`## ${t('keepDoing')}`, ''); A.keep_doing.forEach((k) => L.push(`- ${k}`)); L.push(''); }
+    if (A.conflicts.length) { L.push(`## ${t('conflicts')}`, ''); A.conflicts.forEach((c) => L.push(`- **${c.topic}:** ${c.resolution}`)); L.push(''); }
+  }
+  const ats = R.agents.ats;
+  if (ats) {
+    L.push(`## ${t('coverage')}`, '', `| | ${t('req')} | ${t('status')} | ${t('evidence')} |`, '|---|---|---|---|');
+    const icon = { met: '✅', partial: '🟡', missing: '❌' };
+    ats.requirement_coverage.forEach((rc) => L.push(`| ${t(rc.priority)} | ${rc.requirement} | ${icon[rc.status]} ${t(rc.status)} | ${rc.evidence ? '“' + rc.evidence.replace(/\|/g, '/') + '”' + v(rc) : '—'} |`));
+    L.push('');
+    if (ats.missing_keywords.length) L.push(`**${t('missingKeywords')}:** ${ats.missing_keywords.join(', ')}`, '', `_${t('keywordNote')}_`, '');
+  }
+  const coach = R.agents.coach;
+  if (coach && coach.rewrites.length) {
+    L.push(`## ${t('rewrites')}`, '', `> ${t('rewriteWarn')}`, '');
+    coach.rewrites.forEach((rw) => L.push(`- **${t('before')}:** ${rw.original}${v(rw)}`, `  **${t('after')}:** ${rw.improved}`, `  _${rw.why}_`, ''));
+  }
+  L.push(`## ${t('agentsDetail')}`, '');
+  AGENTS.forEach((a) => {
+    const r = R.agents[a.key];
+    if (!r) return;
+    L.push(`### ${t('agent_' + a.key)} — ${r.score}/100`, '', `_${r.verdict}_`, '');
+    if (r.analysis) L.push(`<details><summary>${t('reasoning')}</summary>`, '', r.analysis, '', '</details>', '');
+    L.push(`**${t('strengths')}**`, '');
+    r.strengths.forEach((s) => L.push(`- ${s.point}${s.evidence ? ` — “${s.evidence}”${v(s)}` : ''}`));
+    L.push('', `**${t('issues')}**`, '');
+    r.issues.forEach((i) => L.push(`- [${t('sev_' + i.severity)}] ${i.section ? i.section + ': ' : ''}${i.problem}${i.evidence ? ` — “${i.evidence}”${v(i)}` : ''}  `, `  → ${t('fix')}: ${i.fix}`));
+    L.push('');
+  });
+  if (R.redactions.length) L.push(`## ${t('privacy')}`, '', R.redactions.map((r) => '- ' + r.label).join('\n'), '');
+  L.push('---', `_${t('disclaimer')}_`);
+  const blob = new Blob([L.join('\n')], { type: 'text/markdown;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'cv-review-report.md';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* ---------------- init ---------------- */
+(async function init() {
+  setLang(navigator.language && navigator.language.toLowerCase().startsWith('tr') ? 'tr' : 'en');
+  try {
+    health = await (await fetch('/api/health')).json();
+    $('demoBadge').classList.toggle('hidden', !health.mock);
+  } catch (e) { /* ignore */ }
+  try { samples = await (await fetch('/api/samples')).json(); renderExampleMenu(); } catch (e) { /* ignore */ }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "reasoning": "Uzlaşma: ATS ve İşe Alım Yöneticisi, Meta Ads/Google Ads eksikliğini en büyük açık olarak görüyor; ATS ve Yönetici GA4'ün zayıf olduğunu belirtiyor. Koç, Recruiter ve ATS staj maddelerinin belirsiz olduğunda hemfikir. Recruiter ve ATS genel kariyer hedefini işaretliyor. Çatışma: Recruiter referans bölümünün kaldırılmasını öneriyor, diğerleri değinmiyor — yer kazanmak için kaldırılması uygun. Sıralama: zorunlu ücretli reklam kanıtı, GA4, staj maddeleri, özet, bitirme projesi.",
+  "overall_summary": "İşletme eğitiminiz ve kulüpteki ölçülebilir sosyal medya başarınız bu pozisyon için güçlü bir başlangıç noktası. CV'nizi en çok zayıflatan şey, rolün önemli bir kısmını oluşturan ücretli reklam (Meta Ads / Google Ads) ve GA4 raporlama deneyiminin görünmemesi. Staj maddeleriniz de yaptığınız işi olduğundan daha az etkileyici gösteriyor. Aşağıdaki adımlarla CV'nizi bu ilana çok daha uygun hale getirebilirsiniz.",
+  "fit_assessment": "moderate",
+  "top_actions": [
+    {"priority": 1, "action": "Meta Ads veya Google Ads deneyiminizi görünür kılın: stajda kampanya kurulumu/takibine katkınız olduysa bir madde ekleyin; hiç yoksa ücretsiz Google Ads veya Meta Blueprint eğitimini tamamlayıp sertifikayı ekleyin.", "why": "İlanda zorunlu bir gereksinim ve CV'de hiç geçmiyor; otomatik elemenin en büyük nedeni olabilir.", "raised_by": ["ATS", "Hiring Manager"], "effort": "high"},
+    {"priority": 2, "action": "'Google Analytics (temel)' yerine GA4 kullandığınız somut bir işi yazın (ör. bitirme projesinde hangi raporu incelediğiniz) — yalnızca gerçekten kullandıysanız.", "why": "GA4 zorunlu bir gereksinim ve şu an yalnızca beceri listesinde 'temel' olarak geçiyor.", "raised_by": ["ATS", "Hiring Manager"], "effort": "low"},
+    {"priority": 3, "action": "Staj maddelerini eylem fiili + araç + sonuç kalıbıyla yeniden yazın (ör. 'içerik takvimi hazırladım, Canva ile gönderi tasarladım'); bilmediğiniz sayılar için [N] gibi yer tutucu kullanıp yalnızca gerçek verilerle doldurun.", "why": "'Yardımcı oldum', 'görev aldım' gibi ifadeler gerçek katkınızı gizliyor ve ilandaki anahtar kelimeleri kaçırıyor.", "raised_by": ["Coach", "Recruiter", "ATS"], "effort": "low"},
+    {"priority": 4, "action": "Genel kariyer hedefini, pozisyonu ve en güçlü iki kanıtınızı (1.200→3.400 takipçi, Google Dijital Atölye sertifikası) içeren 2 satırlık bir özetle değiştirin.", "why": "İşe alım uzmanının ilk okuduğu yer ve şu an hiçbir bilgi vermiyor.", "raised_by": ["Recruiter"], "effort": "low"},
+    {"priority": 5, "action": "Bitirme projesini 2–3 maddeyle genişletin (kanallar, veri kaynakları, KPI önerileri) ve 'Referanslar: İstendiğinde verilecektir' satırını kaldırın.", "why": "En ilgili projeniz tek satırda kalmış; kazanılan alan bu projeye ayrılabilir.", "raised_by": ["Hiring Manager", "Coach", "Recruiter"], "effort": "medium"}
+  ],
+  "conflicts": [
+    {"topic": "Referanslar bölümü", "resolution": "Kaldırılması öneriliyor: bilgi vermiyor ve tek sayfalık CV'de yer kazandırır."}
+  ],
+  "keep_doing": [
+    "Kulüp sosyal medya başarınızda olduğu gibi gerçek sayılarla sonuç göstermek.",
+    "CV'yi tek sayfada ve net bölümlerle tutmak.",
+    "Erasmus deneyimini belirtmek; uyum ve iletişim becerisine işaret ediyor."
+  ]
+}

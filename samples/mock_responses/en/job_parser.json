@@ -1,0 +1,29 @@
+{
+  "job_title": "Junior Data Analyst",
+  "seniority": "junior",
+  "must_have": [
+    {"requirement": "Bachelor's degree in Industrial Engineering, Statistics, Economics, CS or related", "keywords": ["Industrial Engineering", "Statistics", "Economics", "Computer Science", "Bachelor's degree"]},
+    {"requirement": "Solid SQL skills (joins, aggregations)", "keywords": ["SQL", "PostgreSQL", "joins", "aggregations"]},
+    {"requirement": "Python (pandas) or R for data analysis", "keywords": ["Python", "pandas", "R"]},
+    {"requirement": "Experience with a BI tool (Power BI or Tableau)", "keywords": ["Power BI", "Tableau", "dashboard", "BI"]},
+    {"requirement": "Advanced Excel", "keywords": ["Excel", "pivot tables", "VLOOKUP", "advanced Excel"]},
+    {"requirement": "Explaining data to non-technical stakeholders", "keywords": ["communication", "presentation", "stakeholders"]},
+    {"requirement": "Professional working proficiency in English", "keywords": ["English", "IELTS", "TOEFL"]}
+  ],
+  "nice_to_have": [
+    {"requirement": "Retail, FMCG or supply chain data experience", "keywords": ["retail", "FMCG", "supply chain", "inventory"]},
+    {"requirement": "Basic statistics and forecasting methods", "keywords": ["statistics", "forecasting", "time series"]},
+    {"requirement": "Familiarity with Git", "keywords": ["Git", "GitHub", "version control"]},
+    {"requirement": "Google Data Analytics or similar certificate", "keywords": ["Google Data Analytics", "certificate"]},
+    {"requirement": "SQL window functions", "keywords": ["window functions", "SQL"]}
+  ],
+  "responsibilities": [
+    "Build and maintain recurring sales and inventory reports and dashboards",
+    "Write SQL queries against a PostgreSQL data warehouse",
+    "Clean, validate and analyse large datasets with Python or Excel",
+    "Present findings to non-technical stakeholders",
+    "Support ad-hoc analyses such as promotion performance and demand forecasting"
+  ],
+  "soft_skills": ["Communication", "Explaining data to non-technical people", "Teamwork with senior analysts"],
+  "language_requirements": ["English – professional working proficiency"]
+}

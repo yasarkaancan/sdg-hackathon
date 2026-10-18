@@ -1,0 +1,18 @@
+{
+  "agent": "Coach",
+  "score": 48,
+  "verdict": "Kulüp maddeniz güçlü bir örnek, ancak staj maddelerinin çoğu 'yardımcı oldum / görev aldım' gibi belirsiz ifadelerle sonuçları gizliyor.",
+  "rewrites": [
+    {"original": "Şirketin Instagram hesabının yönetiminde yardımcı oldum.", "improved": "Şirketin Instagram hesabı için haftalık içerik takvimi hazırladım ve Canva ile [N] gönderi tasarlayarak paylaşımları Meta Business Suite üzerinden planladım.", "why": "'Yardımcı oldum' yerine somut eylemler ve CV'nizde zaten bulunan araçlar kullanıldı. [N] alanını yalnızca gerçek sayıyla doldurun; bu işleri yapmadıysanız yazmayın."},
+    {"original": "Rakip analizi yaptım.", "improved": "[N] rakip markanın sosyal medya içeriklerini ve etkileşim oranlarını karşılaştıran bir rakip analizi raporu hazırlayarak ekibe [öneri sayısı] içerik önerisi sundum.", "why": "Analizin kapsamı ve çıktısı görünür hale geldi. Köşeli parantezleri yalnızca doğru bilgilerle doldurun."},
+    {"original": "Etkinliklerde görev aldım.", "improved": "Şirketin [etkinlik adı/sayısı] tanıtım etkinliğinde stant yönetimi ve sosyal medya canlı paylaşımlarını üstlendim.", "why": "'Görev aldım' ne yaptığınızı anlatmıyor. Gerçek rolünüzü yazın; bilmiyorsanız maddeyi kaldırın."},
+    {"original": "Hedef kitle analizi ve içerik takvimi hazırladım.", "improved": "Yerel bir kafe zinciri için hedef kitle analizi yaparak [süre] süreli, [kanal sayısı] kanallı bir içerik takvimi ve KPI önerileri hazırladım.", "why": "Projenin kapsamını gösterir ve ilandaki 'içerik takvimi' ifadesiyle eşleşir."}
+  ],
+  "strengths": [
+    {"point": "Ölçülebilir sonuç içeren güçlü bir madde var.", "evidence": "Kulübün Instagram hesabını yönettim, takipçi sayısı 1.200'den 3.400'e çıktı."}
+  ],
+  "issues": [
+    {"severity": "high", "section": "İş Deneyimi", "evidence": "Şirketin Instagram hesabının yönetiminde yardımcı oldum.", "problem": "'Yardımcı oldum' katkınızı belirsizleştiriyor.", "fix": "Her maddeye güçlü bir eylem fiiliyle başlayın (hazırladım, tasarladım, analiz ettim, yönettim) ve sonuç veya kapsamla bitirin."},
+    {"severity": "medium", "section": "İş Deneyimi", "evidence": "Müşterilerle ilgilendim ve mağaza düzeninden sorumluydum.", "problem": "Görev odaklı ve pazarlama rolüyle bağlantısı kurulmamış.", "fix": "Kısa tutun; 'Ayın satış danışmanı' başarısını öne çıkarın."}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "analysis": "Step 1 – Degree: strong (Industrial Engineering). Python/pandas: strong (forecasting project on 2 years × 12 stores). SQL: weak — only 'SQL (basic)' in skills, no usage. BI tool: weak — Power BI listed, dashboard project lacks tool and detail. Excel: medium — weekly stock reports, pivot tables. Communication: medium — presented to an operations manager. English: strong (IELTS 6.5).\nStep 2 – Depth: the forecasting project is the best evidence but ends with 'better than the old method' — no metric, no model type. Internship bullets are duties, not results.\nStep 3 – Seniority: well matched for a junior role; supply-chain internship and certificate are a plus.\nStep 4 – Credible junior with real retail-like data experience; SQL is the main gap for a role built around a PostgreSQL warehouse.",
+  "agent": "Hiring Manager",
+  "score": 64,
+  "verdict": "Credible junior candidate with relevant forecasting experience, but SQL — a daily tool in this role — is not demonstrated.",
+  "strengths": [
+    {"point": "Hands-on analysis of realistic retail data, directly relevant to our clients.", "evidence": "Used Python (pandas) to analyse 2 years of daily sales data from 12 stores."},
+    {"point": "Experience presenting results to a business stakeholder.", "evidence": "Presented results to the company's operations manager."},
+    {"point": "Inventory reporting experience matches our recurring sales and inventory reports.", "evidence": "Responsible for preparing weekly stock reports in Excel."}
+  ],
+  "issues": [
+    {"severity": "high", "section": "Skills / Projects", "evidence": "SQL (basic)", "problem": "The role writes SQL against a PostgreSQL warehouse every day, but the CV gives no example of SQL use.", "fix": "If any project or course used SQL, describe it in a bullet (tables, joins, what question it answered). If not, a small public project (e.g. SQL analysis of an open retail dataset on GitHub) would close this gap."},
+    {"severity": "medium", "section": "Projects", "evidence": "Built a forecasting model that was better than the old method.", "problem": "I cannot judge the depth of the forecasting work: which model, which metric, how much better?", "fix": "Name the method you used and the metric you measured, e.g. 'Built a [model type] model that reduced forecast error (MAPE) from [X%] to [Y%]' — fill in only true values."},
+    {"severity": "medium", "section": "Projects", "evidence": "Made a dashboard about Istanbul traffic data.", "problem": "A dashboard project is relevant, but there is no tool, data source, audience or insight, so it does not prove BI skills.", "fix": "Add the tool, data source and one insight it revealed, in one or two bullets — only what you actually did."},
+    {"severity": "low", "section": "Experience", "evidence": "Helped the team with data entry and cleaning of supplier data.", "problem": "Data cleaning is a core part of this job, but 'helped with' hides your own contribution.", "fix": "Describe what you cleaned and how (Excel functions, rules, number of records), using only facts you can explain in an interview."}
+  ]
+}
