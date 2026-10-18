@@ -190,12 +190,14 @@ writing quality is the easiest thing to fix. If a reviewer fails, its weight is 
 
 ## Evaluation
 
-`python scripts/evaluate.py` runs both sample pairs twice and writes [docs/EVALUATION.md](docs/EVALUATION.md):
-per-agent scores, overall-score spread between runs (consistency), verification rate (grounding), and
-`[placeholder]` vs. concrete numbers in rewrites (fabrication check).
+`python scripts/evaluate.py` runs both sample pairs twice against the real model and writes [docs/EVALUATION.md](docs/EVALUATION.md). Latest run (DeepSeek `deepseek-chat`):
 
-> The committed `EVALUATION.md` was generated in **mock mode** (it validates the code path only). Re-run it with
-> `DEEPSEEK_API_KEY` set to get real model metrics before the presentation.
+- **Grounding:** 210 of 210 quoted excerpts verified in the CV.
+- **Fabrication check:** no rewrite contained a number missing from the CV; 29 `[placeholders]` used instead.
+- **Consistency:** overall score varied by 5 points (EN) and 2 points (TR) between identical runs; the Recruiter is the least stable reviewer.
+- **Speed:** 16–25 s per review.
+
+`python scripts/ablations.py` tests each prompt against a baseline with its key technique removed ([docs/ABLATIONS.md](docs/ABLATIONS.md)). The clearest effects: without the no-invention rule the Coach invented numbers in 5 of 20 rewrites (0 with it), and without the attribute ban the job parser turned "male candidate", age and marital-status filters into requirements (none with it).
 
 ---
 

@@ -57,8 +57,9 @@ from those files by `scripts/build_prompts_doc.py`, so the text below is exactly
 12. **Temperatures** — 0.2 for extraction and synthesis (we want determinism), 0.4 for reviewers (some variety in
     phrasing, still stable scores). Repair calls use 0.0.
 
-Each section below states the prompt's purpose, the technique and why it fits, a design-iteration note, and the
-full prompt text. Iteration notes record only changes we have evidence for; the rest are TODOs for the prompt owner.
+Each section below states the prompt's purpose, the technique and why it fits, a baseline test, and the full prompt
+text. Baseline tests come from `scripts/ablations.py`: each compares the final prompt with a version missing its key
+technique (same model, temperature, schema and inputs). Full results and raw outputs: [ABLATIONS.md](ABLATIONS.md).
 """
 
 SECTIONS = [
@@ -72,7 +73,7 @@ SECTIONS = [
                      "examples would mostly bias it toward the example's domain (a data-analyst example makes a marketing "
                      "posting sound technical). Instead we give precise classification rules (what counts as must vs. "
                      "nice, including Turkish cue words like *tercih sebebi*, *aranan nitelikler*) and a low temperature.",
-        "iteration": "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it",
+        "iteration": "**Baseline test:** without rules 2–8, the parser still sorted the Turkish posting's 4 optional items correctly, so the cue-word rules made no measurable difference there. The attribute ban did: on a fictional posting with discriminatory filters, the baseline listed \"Erkek aday\", \"Askerliğini tamamlamış\", \"28 yaşını geçmemiş\" and \"Bekar\" as requirements in both runs; the final prompt listed none. See [ABLATIONS.md](ABLATIONS.md).",
     },
     {
         "file": "ats_screener",
@@ -84,7 +85,7 @@ SECTIONS = [
                      "more than creativity. A crisp three-level rubric (met = explicit evidence + usage, partial = weaker or "
                      "related evidence, missing = none) plus score anchors makes the output reproducible; few-shot examples "
                      "would add tokens without adding precision.",
-        "iteration": "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it",
+        "iteration": "**Baseline test:** without the rubric, Power BI (listed under Skills only) was rated `met` in 2 of 3 runs; with the rubric it was `partial` in all 3, as defined. Requirements with the same status in all 3 runs rose from 77% to 92%. See [ABLATIONS.md](ABLATIONS.md).",
     },
     {
         "file": "hr_recruiter",
@@ -95,8 +96,7 @@ SECTIONS = [
                      "to check but *how specific* the feedback is. Zero-shot recruiter feedback tends to be generic "
                      "(\"improve formatting\"). Showing a VAGUE and a SPECIFIC version of the same finding teaches the target "
                      "granularity: quote the text, explain why it hurts for this job, give a fix doable in minutes.",
-        "iteration": "While writing the ethics assessment we noticed that the prompt listed \"unexplained gaps\" as a red flag without guidance on how to treat them. We added: *\"suggest a short, honest one-line explanation — a gap is never a disqualifier on its own\"*.\n\n"
-                     "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first for the few-shot examples and why you changed it",
+        "iteration": "**Design change:** while writing the ethics assessment we noticed that the prompt listed \"unexplained gaps\" as a red flag without guidance on how to treat them. We added: *\"suggest a short, honest one-line explanation — a gap is never a disqualifier on its own\"*.\n\n**Baseline test:** removing the examples changed less than expected: issues quoted the CV equally often (93%), but fixes got shorter (27 vs. 32 words on average). The model is already fairly specific without examples; the examples mainly add detail to the fixes. See [ABLATIONS.md](ABLATIONS.md).",
     },
     {
         "file": "hiring_manager",
@@ -108,7 +108,7 @@ SECTIONS = [
                      "`analysis` field placed *first* in the JSON, so it is generated before `score` and `issues` and the "
                      "verdict is conditioned on it. Four named steps (evidence per must-have → depth → seniority → decide) "
                      "keep it focused; the UI shows it in a collapsible \"Reasoning\" box for transparency.",
-        "iteration": "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it",
+        "iteration": "**Baseline test:** removing the `analysis` field did not make scores less stable (baseline 72, 72, 72; final 68, 68, 72). We keep chain-of-thought for transparency, because the reasoning is shown to the user, not for consistency. See [ABLATIONS.md](ABLATIONS.md).",
     },
     {
         "file": "impact_coach",
@@ -118,7 +118,7 @@ SECTIONS = [
                      "style-transfer task, where examples are the most efficient way to specify the target pattern. The "
                      "examples also demonstrate the *placeholder behaviour* (`[X%]`, `[N kişi]`), which instructions alone "
                      "convey poorly. The Turkish example keeps Turkish CVs from receiving English or translated-sounding rewrites.",
-        "iteration": "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it",
+        "iteration": "**Baseline test:** without the HARD RULE and the placeholder examples, 5 of 20 rewrites contained numbers found nowhere in the CV (e.g. \"günlük 50+ müşteriye\", \"5 rakip markanın\") and none used placeholders. With the final prompt: 0 invented numbers and 27 placeholders in 20 rewrites. See [ABLATIONS.md](ABLATIONS.md).",
     },
     {
         "file": "aggregator",
@@ -129,7 +129,7 @@ SECTIONS = [
                      "requires comparing four reports, detecting duplicates phrased differently and resolving "
                      "contradictions — classic multi-step reasoning. The `reasoning` field comes first and is visible in "
                      "the UI (\"How the board decided\").",
-        "iteration": "> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it",
+        "iteration": "**Baseline test:** without the reasoning steps and ranking rules, the aggregator returned 9 and 8 actions instead of at most 5, and merged duplicates less (2.8 vs. 3.4 reviewers credited per action). See [ABLATIONS.md](ABLATIONS.md).",
     },
 ]
 
@@ -145,7 +145,7 @@ def main() -> None:
             f"**File:** [`prompts/{s['file']}.md`](../prompts/{s['file']}.md)\n",
             f"**Purpose.** {s['purpose']}\n",
             f"**Technique & why.** {s['technique']}\n",
-            f"**Design iteration — what we tried first and why we changed it.**\n\n{s['iteration']}\n",
+            f"**Baseline test and design changes.** {s['iteration']}\n",
             "<details><summary><b>Full system prompt</b></summary>\n\n````text\n" + system.strip() + "\n````\n</details>\n",
             "<details><summary><b>User prompt template</b></summary>\n\n````text\n" + user.strip() + "\n````\n</details>\n",
         ]
