@@ -24,7 +24,7 @@ flowchart TD
     AG -. "agent_done event per reviewer (live cards)" .-> OUT
 ```
 
-**0 · Preprocess** (`app/preprocess.py`, no LLM). Extracts text from PDF, DOCX or TXT and rejects CVs under 300 characters, postings under 150, inputs over 15,000 characters and files over 5 MB. Regex rules replace personal data with markers like `[REDACTED: phone]`: contact details, TC Kimlik numbers, addresses, the name (heuristic), and labelled fields such as date of birth, marital status, nationality or military status, in TR and EN. Output: the redacted CV plus a list of removals shown to the user.
+**0 · Preprocess** (`app/preprocess.py`, no LLM). Extracts text from PDF, DOCX or TXT and rejects CVs under 300 characters, postings under 150, inputs over 15,000 characters and files over 4 MB. Regex rules replace personal data with markers like `[REDACTED: phone]`: contact details, TC Kimlik numbers, addresses, the name (heuristic), and labelled fields such as date of birth, marital status, nationality or military status, in TR and EN. Output: the redacted CV plus a list of removals shown to the user.
 
 **1 · Job parser** (LLM). Turns the posting into `must_have` / `nice_to_have` requirements with ATS keywords. If it fails, reviewers use the raw posting.
 

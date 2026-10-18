@@ -1,0 +1,9 @@
+# Not needed at runtime (static/, prompts/ and samples/ ARE needed: the app reads them from disk)
+.env
+.env.*
+docs/
+tests/
+scripts/
+**/__pycache__/
+.pytest_cache/
+.venv/

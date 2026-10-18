@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 MIN_CV_CHARS = 300
 MIN_JOB_CHARS = 150
 MAX_CHARS = 15_000
-MAX_FILE_BYTES = 5 * 1024 * 1024
+MAX_FILE_BYTES = 4 * 1024 * 1024  # Vercel caps function request bodies at 4.5 MB
 
 
 class InputError(ValueError):
@@ -33,7 +33,7 @@ MESSAGES = {
         "job_too_short": "The job posting is too short ({n} characters, minimum {min}). Paste the full posting.",
         "cv_too_long": "Your CV is too long ({n} characters, maximum {max}). Please shorten it or paste only the CV.",
         "job_too_long": "The job posting is too long ({n} characters, maximum {max}).",
-        "file_too_big": "The file is larger than 5 MB.",
+        "file_too_big": "The file is larger than 4 MB.",
         "file_type": "Unsupported file type. Please upload a PDF, DOCX or TXT file.",
         "file_unreadable": "We could not read text from this file. Please paste the CV text instead.",
     },
@@ -45,7 +45,7 @@ MESSAGES = {
         "job_too_short": "İş ilanı çok kısa ({n} karakter, en az {min}). Lütfen ilanın tamamını yapıştırın.",
         "cv_too_long": "CV çok uzun ({n} karakter, en fazla {max}). Lütfen kısaltın veya yalnızca CV'yi yapıştırın.",
         "job_too_long": "İş ilanı çok uzun ({n} karakter, en fazla {max}).",
-        "file_too_big": "Dosya 5 MB'tan büyük.",
+        "file_too_big": "Dosya 4 MB'tan büyük.",
         "file_type": "Desteklenmeyen dosya türü. Lütfen PDF, DOCX veya TXT yükleyin.",
         "file_unreadable": "Bu dosyadan metin okunamadı. Lütfen CV metnini yapıştırın.",
     },

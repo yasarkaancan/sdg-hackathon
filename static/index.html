@@ -143,7 +143,7 @@ const I18N = {
     demoMismatch: 'Demo mode returns pre-recorded responses for the sample CVs, so quotes will not match your own CV (they will show as unverified). Add a DeepSeek API key for real reviews.',
     jobLabel: 'Paste the job posting', jobPh: 'Paste the full job posting here (title, responsibilities, requirements)…',
     cvLabel: 'Your CV', tabUpload: 'Upload file', tabPaste: 'Paste text',
-    dropText: 'Click to upload or drop your CV here', dropHint: 'PDF, DOCX or TXT · max 5 MB',
+    dropText: 'Click to upload or drop your CV here', dropHint: 'PDF, DOCX or TXT · max 4 MB',
     cvPh: 'Paste the text of your CV here…', outLang: 'Feedback language:', loadExample: 'Load example',
     review: 'Review my CV', reviewing: 'Reviewing…',
     boardReviewing: 'The board is reviewing your CV…', boardDone: 'The board has finished its review',
@@ -174,6 +174,7 @@ const I18N = {
     privacyNone: 'No personal details were detected.', showRedacted: 'Show exactly what the AI saw',
     download: 'Download report (.md)', newReview: 'New review',
     errMissingJob: 'Please paste the job posting.', errMissingCv: 'Please upload your CV or paste its text.',
+    errFileTooBig: 'The file is larger than 4 MB. Please upload a smaller file or paste the text.',
     errApi: 'Something went wrong while contacting the server:', partialFail: 'reviewer could not complete; results from the other reviewers are shown.',
     aggFail: 'The synthesis step failed, so the top-actions list is unavailable. The individual reviews below are still valid.',
     jobParseFail: 'The job posting could not be structured; reviewers used the raw posting text.',
@@ -188,7 +189,7 @@ const I18N = {
     demoMismatch: 'Demo modu örnek CV\'ler için kaydedilmiş yanıtlar döndürür; alıntılar sizin CV\'nizle eşleşmez (doğrulanmamış görünür). Gerçek değerlendirme için DeepSeek API anahtarı ekleyin.',
     jobLabel: 'İş ilanını yapıştırın', jobPh: 'İlanın tamamını buraya yapıştırın (pozisyon, iş tanımı, aranan nitelikler)…',
     cvLabel: 'CV\'niz', tabUpload: 'Dosya yükle', tabPaste: 'Metin yapıştır',
-    dropText: 'Yüklemek için tıklayın veya CV\'nizi buraya bırakın', dropHint: 'PDF, DOCX veya TXT · en fazla 5 MB',
+    dropText: 'Yüklemek için tıklayın veya CV\'nizi buraya bırakın', dropHint: 'PDF, DOCX veya TXT · en fazla 4 MB',
     cvPh: 'CV metninizi buraya yapıştırın…', outLang: 'Geri bildirim dili:', loadExample: 'Örnek yükle',
     review: 'CV\'mi değerlendir', reviewing: 'Değerlendiriliyor…',
     boardReviewing: 'Kurul CV\'nizi değerlendiriyor…', boardDone: 'Kurul değerlendirmesini tamamladı',
@@ -219,6 +220,7 @@ const I18N = {
     privacyNone: 'Kişisel bilgi tespit edilmedi.', showRedacted: 'Yapay zekânın tam olarak ne gördüğünü göster',
     download: 'Raporu indir (.md)', newReview: 'Yeni değerlendirme',
     errMissingJob: 'Lütfen iş ilanını yapıştırın.', errMissingCv: 'Lütfen CV\'nizi yükleyin veya metnini yapıştırın.',
+    errFileTooBig: 'Dosya 4 MB\'tan büyük. Lütfen daha küçük bir dosya yükleyin veya metni yapıştırın.',
     errApi: 'Sunucuyla iletişimde bir sorun oluştu:', partialFail: 'değerlendirici tamamlanamadı; diğer değerlendiricilerin sonuçları gösteriliyor.',
     aggFail: 'Sentez adımı başarısız oldu, bu yüzden öncelikli adımlar listesi yok. Aşağıdaki ayrı değerlendirmeler geçerlidir.',
     jobParseFail: 'İlan yapılandırılamadı; değerlendiriciler ilanın ham metnini kullandı.',
@@ -236,6 +238,7 @@ const AGENTS = [
 ];
 const SHORT = { ats: 'ATS', recruiter: 'Recruiter', hiring_manager: 'Hiring Manager', coach: 'Coach' };
 const STAGES = ['preprocess', 'parse_job', 'agents', 'aggregate'];
+const MAX_FILE_BYTES = 4 * 1024 * 1024;  // keep in sync with app/preprocess.py
 
 let lang = 'en';
 let cvMode = 'file';
@@ -321,6 +324,7 @@ async function startReview() {
   const cvText = $('cvText').value.trim();
   if (!job) return showInputError(t('errMissingJob'));
   if (cvMode === 'file' ? !cvFile : !cvText) return showInputError(t('errMissingCv'));
+  if (cvMode === 'file' && cvFile.size > MAX_FILE_BYTES) return showInputError(t('errFileTooBig'));
 
   const fd = new FormData();
   fd.append('job_text', job);
