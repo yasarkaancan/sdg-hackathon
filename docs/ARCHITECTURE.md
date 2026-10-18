@@ -1,5 +1,7 @@
 # Architecture
 
+_Owner: Sefa Berk Acar (project lead · backend & pipeline) · Team 10_
+
 ```mermaid
 flowchart TD
     U["👩‍🎓 Job seeker<br/>(browser, static/index.html)"] -->|"job posting + CV file/text + language<br/>POST /api/review (multipart)"| API["FastAPI · app/main.py"]

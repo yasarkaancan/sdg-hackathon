@@ -1,5 +1,9 @@
 # CV Review Board — Technical Documentation
 
+**Team 10** · Samsung Innovation Campus · *Generative AI for the SDGs*
+
+**Team:** Sefa Berk Acar (project lead · backend & pipeline) · Umut Öztürk (prompt engineering lead) · Hikmet Mete Çelik (frontend & demo video) · Betül Kaya (ethics, privacy & safety) · Yaşar Kaan Can (evaluation, SDG research & presentation)
+
 ## 1. Overview
 
 CV Review Board reviews a CV against **one specific job posting**. Four specialised LLM reviewer agents evaluate the CV in parallel from different hiring perspectives, and an aggregator merges their findings into at most five prioritised actions. It is built for young and first-time job seekers in Türkiye who lack access to career coaching, and it works in Turkish and English. It addresses **SDG 8**, targets **8.5** (productive employment, including for young people) and **8.6** (reducing youth not in employment, education or training).
@@ -61,7 +65,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Key decisions:** split compound requirements; low temperature; personal attributes in a posting never become requirements.
 - **Excerpt:** *"Do NOT extract personal attributes such as age, gender, marital status, military service or nationality as requirements, even if the posting mentions them."*
 
-> TODO (team): describe what you tried first and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it
 
 ### 4.2 ATS & Keyword Screener — [`ats_screener.md`](../prompts/ats_screener.md)
 - **Goal:** mark each requirement met, partial or missing.
@@ -69,7 +73,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Key decisions:** one row per requirement; verbatim evidence or `""`; missing-keyword fixes say "only if you genuinely have the skill".
 - **Excerpt:** *"partial" = related but weaker evidence: the keyword appears only in a skills list with no usage, OR a closely related skill is shown …*
 
-> TODO (team): describe what you tried first and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it
 
 ### 4.3 HR Recruiter — [`hr_recruiter.md`](../prompts/hr_recruiter.md)
 - **Goal:** judge first impression, structure, clarity and red flags.
@@ -78,7 +82,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Excerpt:** *"The pattern: quote the exact text, explain WHY it hurts for THIS job, and give a fix the candidate can apply in minutes."*
 - **Iteration note:** while writing the ethics assessment we noticed the prompt listed "unexplained gaps" as a red flag without guidance on how to treat them. We added: *"suggest a short, honest one-line explanation — a gap is never a disqualifier on its own"*.
 
-> TODO (team): describe what you tried first for the few-shot examples and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first for the few-shot examples and why you changed it
 
 ### 4.4 Hiring Manager — [`hiring_manager.md`](../prompts/hiring_manager.md)
 - **Goal:** decide whether the evidence shows the ability to do this job at this level.
@@ -86,7 +90,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Key decisions:** four fixed steps, about 150 words maximum; parsed seniority inserted via `{seniority_hint}`; "the CV fails to show" is kept distinct from "the candidate lacks".
 - **Excerpt:** *"Step 4 — Only now decide the score and the issues, consistent with steps 1–3."*
 
-> TODO (team): describe what you tried first and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it
 
 ### 4.5 Impact & Writing Coach — [`impact_coach.md`](../prompts/impact_coach.md)
 - **Goal:** rewrite the 3–5 weakest bullets as action + what + measurable result.
@@ -94,7 +98,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Key decisions:** a HARD RULE against inventing facts; verbatim `original` so it can be grounded; code flags any new number in `improved`.
 - **Excerpt:** *"When a metric would make the bullet stronger but the CV does not give it, insert a placeholder in square brackets, such as [X%], [number of users], [N kişi] …"*
 
-> TODO (team): describe what you tried first and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it
 
 ### 4.6 Aggregator — [`aggregator.md`](../prompts/aggregator.md)
 - **Goal:** at most five actions, ranked by impact on getting an interview.
@@ -102,7 +106,7 @@ Full prompts are in [`/prompts`](../prompts); excerpts are verbatim.
 - **Key decisions:** multi-reviewer issues rank higher; findings that rest only on unverified quotes get caution; the CV is never sent to this agent.
 - **Excerpt:** *"DO NOT INTRODUCE NEW CLAIMS: every action, conflict and keep_doing item must come from at least one reviewer's report."*
 
-> TODO (team): describe what you tried first and why you changed it
+> TODO (Umut Öztürk, prompt engineering lead): describe what you tried first and why you changed it
 
 ## 5. Cross-cutting prompt principles
 
@@ -119,7 +123,7 @@ Personal data is redacted before any API call; unverified quotes carry a ⚠ bad
 
 `scripts/evaluate.py` measures score spread between runs, verification rate and placeholders vs. concrete numbers. The committed [EVALUATION.md](EVALUATION.md) came from mock mode, so there are no model results yet.
 
-> TODO (team): re-run `python scripts/evaluate.py` with `DEEPSEEK_API_KEY` set and summarise the real results here
+> TODO (Yaşar Kaan Can, evaluation): re-run `python scripts/evaluate.py` with `DEEPSEEK_API_KEY` set and summarise the real results here
 
 ## 7. Limitations
 

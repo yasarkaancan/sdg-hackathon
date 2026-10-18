@@ -1,5 +1,7 @@
 # Ethics assessment
 
+_Owner: Betül Kaya (ethics, privacy & safety) · Team 10_
+
 **Who uses this:** young people and new graduates in Türkiye applying for their first jobs or internships — many
 without access to career coaches, alumni networks or professional CV reviews. That is the point of the tool
 (SDG 8.5, 8.6, 10.2), and also why we treat them as a **vulnerable user group**: a first-time job seeker may take

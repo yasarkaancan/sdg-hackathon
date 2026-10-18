@@ -2,7 +2,7 @@
 
 **A board of specialised AI reviewers gives first-time job seekers recruiter-quality feedback on their CV — for one specific job posting, in Turkish or English, for free.**
 
-> Samsung Innovation Campus · *Generative AI for the SDGs* hackathon
+> **Team 10** · Samsung Innovation Campus · *Generative AI for the SDGs* hackathon
 > **SDG 8 — Decent Work and Economic Growth** (targets 8.5 & 8.6) · secondary **SDG 10.2** (inclusion)
 
 You paste a job posting and upload your CV. Four AI "reviewer agents" — an **ATS screener**, an **HR recruiter**, a
@@ -268,11 +268,14 @@ Simplified / not done:
 
 ## Team
 
-| Name | Role |
-|---|---|
-| _Name_ | _e.g. Prompt design & evaluation_ |
-| _Name_ | _e.g. Backend / pipeline_ |
-| _Name_ | _e.g. Frontend & demo video_ |
-| _Name_ | _e.g. Ethics assessment & SDG research_ |
+**Team 10**
+
+| Name | Role | Owns | Contact |
+|---|---|---|---|
+| Sefa Berk Acar | Project lead · backend & pipeline | `app/` (pipeline, LLM client, streaming API), Vercel deployment, [ARCHITECTURE.md](docs/ARCHITECTURE.md) | acarsefa621@gmail.com |
+| Umut Öztürk | Prompt engineering lead | [`prompts/`](prompts), [PROMPTS.md](docs/PROMPTS.md), prompt-design section of [DOCUMENTATION.md](docs/DOCUMENTATION.md) | umtozturk2003@gmail.com |
+| Hikmet Mete Çelik | Frontend & demo video | [`static/index.html`](static/index.html) (UI, TR/EN strings), screenshots, demo video | hmetecelik33@gmail.com |
+| Betül Kaya | Ethics, privacy & safety | Redaction rules ([`app/preprocess.py`](app/preprocess.py)), grounding check, [ETHICS.md](docs/ETHICS.md) | kayabetul094@gmail.com |
+| Yaşar Kaan Can | Evaluation, SDG research & presentation | [`scripts/evaluate.py`](scripts/evaluate.py), samples, [EVALUATION.md](docs/EVALUATION.md), SDG section, report & slides | ycan25@ku.edu.tr |
 
 Built with FastAPI, httpx, pydantic, rapidfuzz, pypdf, python-docx, Tailwind CSS and the DeepSeek API.
