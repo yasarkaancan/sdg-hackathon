@@ -19,6 +19,7 @@ and the score is computed transparently in code — not by the model.
 
 - [Why — the SDG link](#why--the-sdg-link)
 - [Quick start](#quick-start)
+- [Deploy to Vercel](#deploy-to-vercel)
 - [How it works](#how-it-works)
 - [Prompt engineering](#prompt-engineering)
 - [Ethics & safety](#ethics--safety)
@@ -81,6 +82,24 @@ artificial delays so the live progress UI behaves like the real thing. A yellow 
 for offline development and as a fallback during a live demo.
 
 Optional: `pip install pytest && pytest -q` runs the unit tests (redaction, grounding, scoring, schemas, prompts).
+
+---
+
+## Deploy to Vercel
+
+**Live demo:** https://cv-review-board.vercel.app
+
+The repo deploys to Vercel as-is. Vercel auto-detects the FastAPI app at `app/main.py`, and the config files are:
+
+- `vercel.json`: allows a review up to 120 s (`maxDuration`) and keeps `docs/`, `tests/` and `scripts/` out of the function bundle. `static/`, `prompts/` and `samples/` must stay in, because the app reads them at runtime.
+- `.python-version`: Python 3.12.
+- `.vercelignore`: skips files that are not needed for the deployment.
+
+**API key:** add `DEEPSEEK_API_KEY` (and optionally `DEEPSEEK_MODEL`) under *Project → Settings → Environment Variables*, then redeploy. Without it, the deployed app runs in demo mode with the pre-recorded sample responses.
+
+**Limits:** Vercel caps request bodies at 4.5 MB, so CV uploads are limited to 4 MB. A review makes 6 LLM calls and took about 15 s in our test run.
+
+> ⚠️ Once the key is set, anyone with the URL can spend your DeepSeek credits (the app has no login or rate limiting). Keep a low balance on the DeepSeek account during the hackathon.
 
 ---
 
